@@ -1,6 +1,6 @@
 // Home work 2
 
-// Change case of  letters to opposite in the line 
+// Change the case of the letters to the opposite in string 
 function changeRegister(str) {
     if(typeof str === 'string'){
         return str.split('').map((letter) => letter === letter.toUpperCase() ? letter.toLowerCase() : letter.toUpperCase()).join('')
@@ -13,9 +13,9 @@ console.log(changeRegister('Test')); // output: tEST
 
 
 
-// Kill browser page
+// kill the browser page
 
-// example : infinite fetch
+// example: infinite fetch
 function killYourPage () {
     let heap 
     console.error('Sorry I killed your page...')
@@ -25,6 +25,3 @@ function killYourPage () {
             .then(json => { heap += json })
     }
 }
-
-
-
