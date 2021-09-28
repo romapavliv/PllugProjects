@@ -27,4 +27,4 @@ function killYourPage () {
 }
 
 
-
+killYourPage функцію можна виконати простіше.
