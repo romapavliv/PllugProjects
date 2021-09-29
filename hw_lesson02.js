@@ -1,4 +1,4 @@
-// Home work 2
+// Home work lesson 2
 
 // Change case of  letters to opposite in the line 
 function changeRegister(str) {
