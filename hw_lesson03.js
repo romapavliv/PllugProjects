@@ -84,4 +84,6 @@ function getOnlyInteger(arr) {
 function returnVoid(){ return }
 
 
-
+() => { } //як виконати цю функцію?
+Є пропуски крапки з комою.
+Завдання виконано.
