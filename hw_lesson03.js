@@ -1,7 +1,8 @@
 // Home work lesson 3
 
-// create empty object
+// two ways to create empty object
 const emptyObj = {};
+
 const emptyObj2 = new Object();
 
 // create empty object without prototype
@@ -14,17 +15,18 @@ const newObj = {
 }
 
 newObj['lastName'] = 'Shevchyk';
+
 newObj.city = 'Novoyavorivsk';
 
 Object.assign(newObj, {
     country: 'Ua',
 });
 
-// create empty array
+// two ways to create empty array
 const emptyArr = [];
 const emptyArr2 = new Array();
 
-// create empty array with length 100500
+// two ways to create empty array with length 100500
 const bigArr = [];
 bigArr.length = 100500;
 
@@ -33,7 +35,7 @@ const bigArr2 = new Array(100500);
 // create array with random elements
 let arrWithRandomEl = [1, true, 'hello', null, undefined];
 
-// clear array
+// two ways to clear array
 arrWithRandomEl.length = 0;
 arrWithRandomEl = [];
 
@@ -50,7 +52,7 @@ function isEmptyArr(arr) {
 
 // check object to emptiness
 function isEmptyObj(obj) {
-    if (!obj instanceof Object) return null;
+    if (typeof obj !== 'object' || Array.isArray(obj)) return null;
     return !Object.keys(obj).length;
 }
 
@@ -62,7 +64,7 @@ function concatSeveralArrays(firstArr, ...anotherArrays) {
     return firstArr;
 }
 
-// raise to degree  3 all the elements of array
+// raise to degree 3 all the elements of array
 function allArrInDegree3(arr) {
     return arr.map((el) => el ** 3);
 }
