@@ -84,4 +84,4 @@ const voidFoo = () => { }
 
 function returnVoid() { return; }
 
-(() => {})();
+(() => { })();
