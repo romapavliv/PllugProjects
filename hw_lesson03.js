@@ -18,7 +18,7 @@ newObj.city = 'Novoyavorivsk';
 
 Object.assign(newObj, {
     country: 'Ua',
-})
+});
 
 // create empty array
 const emptyArr = [];
@@ -77,9 +77,9 @@ function getOnlyInteger(arr) {
     return arr.filter((val) => Number.isInteger(val));
 }
 
-// void function
-() => { }
-function returnVoid(){ return }
+// three ways to create void function
+const voidFoo = () => { }
 
+function returnVoid() { return; }
 
-
+(() => {})();
