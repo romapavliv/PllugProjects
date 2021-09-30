@@ -85,7 +85,7 @@ const yourInfo = {
     },
 
     getYourOS() {
-        const appVersion = navigator.appVersion
+        const appVersion = navigator.appVersion;
         
         if (appVersion.indexOf("Win") != -1) {
             return "Windows";
