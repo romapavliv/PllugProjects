@@ -77,7 +77,13 @@ console.log(goToDeep(someArr)); // output: [ [ 1 ], [ [ 2 ] ], [ 1 ], [ [ [ 3 ] 
 function convertToNumber(data, fieldsToNumber) {
     const newObj = {};
     for (let [key, val] of Object.entries(data)) {
-        fieldsToNumber.includes(key) ? newObj[key] = Number.parseFloat(val.toString().replace(',', '.')) : newObj[key] = val;
+        if (fieldsToNumber.includes(key)) {
+            val = Number.parseFloat(val.toString().replace(',', '.'));
+            if (Number.isNaN(val)) {
+                val = null;
+            }
+        }
+        newObj[key] = val;
     }
     return newObj;
 }
