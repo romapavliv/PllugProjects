@@ -34,6 +34,7 @@ function getNumberFromObj(obj) {
 
 console.log(getNumberFromObj({ a: 22, b: -11.35, c: 41.2, d: 'hello' })); // output: { a: 22, c: 41.2 }
 
+Завдання виконано.
 
 
 
