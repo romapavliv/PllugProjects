@@ -67,3 +67,4 @@ const yourInfo = {
 
 yourInfo.printData(); // example expect: Your browser Google Chrome or Chromium, your OS Windows 
 
+Завдання виконано, але умови в функціях можна упростити.
