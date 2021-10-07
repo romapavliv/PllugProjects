@@ -10,15 +10,14 @@ function upFonts() {
 // remove all classes in the last item in list
 function removeAllClassesLastChild() {
   const animals = document.querySelector("#animals");
-  animals.lastElementChild.className = "";
+  animals.lastElementChild.removeAttribute("class");
 }
 // removeAllClassesLastChild();
 
 // change background color next element after element with id 'cat'
 function changeBackground() {
   const cat = document.querySelector("#cat");
-
-  cat.nextSibling.nextSibling.style.background = "red";
+  cat.nextElementSibling.style.background = "red";
 }
 // changeBackground();
 
@@ -75,25 +74,18 @@ function addFishList() {
 // reverse all elements in list animals
 function reverseElements() {
   const animals = document.querySelector("#animals");
-  const all = animals.querySelectorAll("li");
-  const newAll = [];
-
-  for (let el of all) {
-    newAll.unshift(el);
-  }
-  animals.replaceWith(...newAll);
+  const allChildren = [...animals.querySelectorAll("li")].reverse();
+  animals.replaceChildren(...allChildren);
 }
 // reverseElements();
 
 // convert element  class list to data attribute in list animals
 function fromClassToDada() {
-  const animals = document.querySelector("#animals").children;
-
-  for (let el of animals) {
+  [...document.querySelector("#animals").children].forEach((el) => {
     el.classList.forEach((classEl) => {
-      el.setAttribute(`data-${classEl}`, "");
+      el.dataset[classEl] = "";
     });
-    el.classList = "";
-  }
+    el.removeAttribute("class");
+  });
 }
 // fromClassToDada();
