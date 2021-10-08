@@ -38,6 +38,7 @@ arrOfComments.forEach((el) => {
   addCommentToList(el);
 });
 
+// check the input for errors and allow input latin alphabet and numbers
 function checkNicknameInput() {
   this.value = this.value.replace(/[^A-Za-z0-9]/gi, "");
   const textContent = this.value.trim();
@@ -69,8 +70,7 @@ function checkNicknameInput() {
   formIsInvalid();
 }
 
-//
-
+// check the input for errors and allow input latin alphabet
 function checkNameInput() {
   this.value = this.value.replace(/[^A-Za-z]/gi, "");
   const textContent = this.value.trim();
@@ -93,8 +93,7 @@ function checkNameInput() {
   formIsInvalid();
 }
 
-//
-
+// check the textarea for errors and allow input latin alphabet, numbers, spaces and .,!?-
 function checkComment() {
   this.value = this.value.replace(/[^A-Za-z.,!?-\s]/gi, "");
   const textContent = this.value.trim();
@@ -117,6 +116,7 @@ function checkComment() {
   formIsInvalid();
 }
 
+// get values from form, add to collection and clear form, validators and errors
 function sendComment(event) {
   event.preventDefault();
   if (formIsInvalid()) {
@@ -141,13 +141,14 @@ function sendComment(event) {
   formIsInvalid();
 }
 
+// validation of the form
 function formIsInvalid() {
   const validators = [
     nicknameInput.classList.contains("invalid"),
     nameInput.classList.contains("invalid"),
     comment.classList.contains("invalid"),
     nicknameInput.value === "",
-    nameInput.value == "",
+    nameInput.value === "",
     comment.value === "",
   ];
   submitBtn.disabled = validators.includes(true);
@@ -155,6 +156,7 @@ function formIsInvalid() {
   return validators.includes(true);
 }
 
+// create and add new element in html
 function addCommentToList(data) {
   function createEl(fatherEl, selector, classEl = null) {
     const newEl = document.createElement(selector);
@@ -164,9 +166,10 @@ function addCommentToList(data) {
   }
 
   const commentList = document.querySelector("#comments-list");
-  const listElement = createEl(commentList, "div", "comments_elements");
+  const listElement = createEl(commentList, "div", "comments_element");
+  const img = createEl(listElement, "div", "img");
 
-  const commentText = createEl(listElement, "p");
+  const commentText = createEl(listElement, "p", "element_text");
   const commentName = createEl(listElement, "p");
   commentName.textContent = data.name;
   const commentNickname = createEl(commentName, "span");
