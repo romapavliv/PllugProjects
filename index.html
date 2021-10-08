@@ -2,30 +2,53 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/style.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style/style.css">
+  <title>Document</title>
 </head>
 
 <body>
-    <div class="container">
-        <ul id="animals">
-            <li class="pet">Dog</li>
-            <li id="cat" class="pet">Cat</li>
-            <li class="wild">Elephant</li>
-            <li class="wild">Whale</li>
-            <li class="wild">Horse</li>
-            <li class="wild dangerous">Tiger</li>
-        </ul>
-        <ul id="birds">
-            <li class="wild">Eagle</li>
-            <li class="wild">Sparrow</li>
-            <li class="pet wild">Parrot</li>
-        </ul>
+
+  <div class="content">
+    <form name="comment-form" class="form">
+      <div class="form-control">
+        <label for="nickname">Enter your nickname</label>
+        <input id="nickname-input" name="nickname" type="text" placeholder="user123">
+        <div class="error">
+          <span id="nickname-error"></span>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="name">Enter your name</label>
+        <input id="name-input" name="name" type="text" placeholder="John">
+        <div class="error">
+          <span id="name-error"></span>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="comment">Enter some comment</label>
+        <textarea name="comment" id="comment" cols="100" rows="5"></textarea>
+        <div class="error">
+          <span id="comment-error"></span>
+        </div>
+      </div>
+      <button type="submit" id="submit" class="submit-btn" disabled>Send</button>
+    </form>
+
+    <div id="comments-list" class="comments">
+      <!-- <div class="comments_elements">
+        <p><span>john2021</span> John</p>
+        <p>Hello, this is my comment</p>
+      </div> -->
     </div>
-    <script src="hw_lesson05_DOM.js"></script>
+  </div>
+
+
+  <script src="hw_lesson06_eventListener.js"></script>
 </body>
 
 </html>

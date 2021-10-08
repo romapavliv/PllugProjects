@@ -1,0 +1,126 @@
+@import 'zeroStyle.scss';
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #181818;
+}
+
+.content {
+  padding: 8rem 1rem;
+  margin: 0 auto;
+  width: 80%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #202020e3;
+
+
+  .form {
+    position: relative;
+    height: 400px;
+
+    .form-control {
+      width: 500px;
+      color: #fff;
+
+      min-height: 85px;
+
+      >label {
+        margin-bottom: 5px;
+        display: block;
+        font-size: 20px;
+      }
+
+      textarea {
+        height: 100px;
+        resize: none;
+      }
+
+      input,
+      textarea {
+        width: 500px;
+        padding: 0.4rem;
+        font-size: 1.2rem;
+        border: 1px solid #ccc;
+        margin-bottom: 5px;
+
+        &.invalid {
+          outline: 2px solid #ff3232;
+        }
+
+        &.valid {
+          outline: 2px solid #2dff2d;
+        }
+      }
+
+      .error {
+        color: #ff3232;
+        height: 20px;
+        width: 500px;
+      }
+
+    }
+
+    .submit-btn {
+      position: absolute;
+      right: 0px;
+      width: 110px;
+      height: 35px;
+      border: 1px solid black;
+      border-radius: 4px;
+      cursor: pointer;
+      background-color: #3ea6ff;
+      margin: 0 0.5rem;
+      transition: all .2s ease;
+      font-size: 17px;
+      transition: background .3s ease;
+      user-select: none;
+
+      &:hover {
+        background-color: #368bd4;
+      }
+
+      &:active {
+        background-color: #296ba5;
+      }
+
+      &:disabled {
+        color: #555455;
+        background-color: #3c393c;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.comments {
+  padding: 5rem 1rem;
+  border-top: 1px solid gray;
+  width: 800px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  align-items: flex-start;
+   .comments_elements {
+    margin-bottom: 2rem;
+    color: #ffffff;
+    font-size: 20px;
+
+    &>p {
+      &>span {
+        &::after {
+          content: '-';
+          margin: 0 8px;
+        }
+      }
+    }
+  }
+}
