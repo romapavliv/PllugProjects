@@ -1,1 +1,1 @@
-# You can try Pllug project https://shevchenkot.github.io/PllugProjects/ 
+# You can try the latest homework there: https://shevchenkot.github.io/PllugProjects/ 
