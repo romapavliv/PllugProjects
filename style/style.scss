@@ -99,7 +99,6 @@ body {
 .comments {
   padding: 5rem 1rem;
   border-top: 1px solid gray;
-  width: 800px;
   min-height: 400px;
   display: flex;
   flex-direction: column;
@@ -127,12 +126,9 @@ body {
       margin-left: 70px;
       width: 700px;
       overflow: hidden;
-      //white-space: nowrap;
       text-overflow: ellipsis;
 
       &>span {
-
-
         &::after {
           content: '-';
           margin: 0 8px;
@@ -145,10 +141,49 @@ body {
       font-weight: 300;
       margin-top: 8px;
       color: #ffffff;
+      white-space: normal;
+    }
+  }
+}
 
-      
-      white-space:normal;
-      
+@media(max-width:992px) {
+  .comments {
+    width: 100%;
+
+    .comments_element {
+      &>p {
+        width: 500px;
+      }
+    }
+  }
+}
+
+@media(max-width:767px) {
+  .content {
+    width: 100%;
+
+    .form {
+      .form-control {
+        width: 280px;
+
+        input,
+        textarea {
+          width: 280px;
+        }
+
+        .error {
+          
+          width: 280px;
+        }
+      }
+    }
+  }
+
+  .comments {
+    .comments_element {
+      &>p {
+        width: 200px;
+      }
     }
   }
 }

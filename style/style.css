@@ -203,7 +203,6 @@ body {
 .comments {
   padding: 5rem 1rem;
   border-top: 1px solid gray;
-  width: 800px;
   min-height: 400px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -256,5 +255,33 @@ body {
   margin-top: 8px;
   color: #ffffff;
   white-space: normal;
+}
+
+@media (max-width: 992px) {
+  .comments {
+    width: 100%;
+  }
+  .comments .comments_element > p {
+    width: 500px;
+  }
+}
+
+@media (max-width: 767px) {
+  .content {
+    width: 100%;
+  }
+  .content .form .form-control {
+    width: 280px;
+  }
+  .content .form .form-control input,
+  .content .form .form-control textarea {
+    width: 280px;
+  }
+  .content .form .form-control .error {
+    width: 280px;
+  }
+  .comments .comments_element > p {
+    width: 200px;
+  }
 }
 /*# sourceMappingURL=style.css.map */
