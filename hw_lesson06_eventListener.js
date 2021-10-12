@@ -176,3 +176,5 @@ function addCommentToList(data) {
   commentNickname.textContent = data.nickname;
   commentText.textContent = data.comment;
 }
+
+Завдання виконано, але умови у функціях можна упростити.
