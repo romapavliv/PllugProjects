@@ -25,24 +25,27 @@
       </div>
     </div>
     <div class="right-side">
-      <div class="right-side__tittle right-side__title-left">
-        <h3>Thank You!</h3>
+      <div class="right-side__tittle">
+        <h3>Sign up</h3>
       </div>
-      <div class="right-side__text">
-        <p>We have sent an email to <span>username@gmail.com</span>.<br>
-          You should soon receive an email allowing you to
-          reset your
-          password.
-          Please make sure to check your spam and trash if you can't find the email.</p>
-        <p>
-          If you didn't got email about 5 minutes click
-          <a class="simple-btn" href="./signUp.html">here</a>
-        </p>
-
-        <div class="form__buttons">
-          <a class="red-btn btn-left" href="#">Go to sign in</a>
+      <form class="right-side__form">
+        <div class="form__control">
+          <label for="email">Email</label>
+          <input type="email" placeholder="Enter your Email">
         </div>
-      </div>
+        <div class="form__control">
+          <label for="create-pass">Create Password</label>
+          <input type="password" placeholder="Create your password">
+        </div>
+        <div class="form__control">
+          <label for="confirm-pass">Confirm Password</label>
+          <input type="password" placeholder="Confirm your password">
+        </div>
+        <div class="form__buttons">
+          <a class="red-btn" href="#">Sign up</a>
+          <a class="simple-btn" href="#">Sign in</a>
+        </div>
+      </form>
     </div>
   </div>
 </body>
