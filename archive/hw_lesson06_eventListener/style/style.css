@@ -256,32 +256,4 @@ body {
   color: #ffffff;
   white-space: normal;
 }
-
-@media (max-width: 992px) {
-  .comments {
-    width: 100%;
-  }
-  .comments .comments_element > p {
-    width: 500px;
-  }
-}
-
-@media (max-width: 767px) {
-  .content {
-    width: 100%;
-  }
-  .content .form .form-control {
-    width: 280px;
-  }
-  .content .form .form-control input,
-  .content .form .form-control textarea {
-    width: 280px;
-  }
-  .content .form .form-control .error {
-    width: 280px;
-  }
-  .comments .comments_element > p {
-    width: 200px;
-  }
-}
 /*# sourceMappingURL=style.css.map */
