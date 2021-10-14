@@ -1,21 +1,82 @@
-let text;
-// function speedTest(testName, callback) {
-//   console.time(testName);
-//   callback();
-//   console.timeEnd(testName);
-// }
+const size = 100; // small
+//const size = 10000; // medium
+//const size = 10000000; // large
+let text, result;
 
-// console.time("test1");
-// const obj1 = new Map();
-// console.timeEnd("test1");
+const obj = {};
+const objWithoutProto = Object.create(null);
+const map = new Map();
 
-// console.time("test2");
-// let obj2 = {};
-// console.timeEnd("test2");
+// fill the data structure
+for (let i = 0; i < size; i++) {
+  obj[i] = i;
+  objWithoutProto[i] = i;
+  map.set(i, i);
+}
 
-// console.time("test3");
-// const obj3 = new Map();
-// console.timeEnd("test3");
+//? test 1 add new key
+text = "add new key to object";
+console.time(text);
+result = obj["test"] = "test";
+console.timeEnd(text);
+
+text = "add new key to object without proto";
+console.time(text);
+result = objWithoutProto["test"] = "test";
+console.timeEnd(text);
+
+text = "add new key to Map";
+console.time(text);
+result = map.set("test", "test");
+console.timeEnd(text);
+
+//? test 2 - get the value by key
+text = "get the value by key from object";
+console.time(text);
+result = obj[50];
+console.timeEnd(text);
+
+text = "get the value by key from object without proto";
+console.time(text);
+objWithoutProto[50];
+console.timeEnd(text);
+
+text = "get the value by key from Map";
+console.time(text);
+result = map.get(50);
+console.timeEnd(text);
+
+//? test 3 - remove key
+text = "remove key from small object";
+console.time(text);
+result = delete obj[50];
+console.timeEnd(text);
+
+text = "remove key from object without proto";
+console.time(text);
+result = delete objWithoutProto[50];
+console.timeEnd(text);
+
+text = "remove key from small Map";
+console.time(text);
+result = map.delete(50);
+console.timeEnd(text);
+
+//? test 4 - convert to array
+text = "convert Object to array";
+console.time(text);
+result = Object.entries(obj);
+console.timeEnd(text);
+
+text = "convert object without proto to array";
+console.time(text);
+result = Object.entries(objWithoutProto);
+console.timeEnd(text);
+
+text = "convert Map to array";
+console.time(text);
+result = Array.from(map, ([name, value]) => [name, value]);
+console.timeEnd(text);
 
 // convert Map to object
 const mapForConvert = new Map([
@@ -27,7 +88,7 @@ const mapForConvert = new Map([
 function convertMapToObj(map) {
   return map instanceof Map ? Object.fromEntries(map) : null;
 }
-console.log(convertMapToObj(mapForConvert)); // output: { true: 1, '[object Object]': 2, test3: 3 }
+// console.log(convertMapToObj(mapForConvert)); // output: { true: 1, '[object Object]': 2, test3: 3 }
 
 // convert Object to Map
 const objForConvert = {
