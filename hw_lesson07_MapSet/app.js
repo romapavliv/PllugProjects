@@ -1,6 +1,6 @@
-const size = 100; // small
+//const size = 100; // small
 //const size = 10000; // medium
-//const size = 10000000; // large
+const size = 10000000; // large
 let text, result;
 
 const obj = {};
@@ -15,12 +15,12 @@ for (let i = 0; i < size; i++) {
 }
 
 //? test 1 add new key
-text = "add new key to object";
+text = "add new key to Object";
 console.time(text);
 result = obj["test"] = "test";
 console.timeEnd(text);
 
-text = "add new key to object without proto";
+text = "add new key to Object without proto";
 console.time(text);
 result = objWithoutProto["test"] = "test";
 console.timeEnd(text);
@@ -31,12 +31,12 @@ result = map.set("test", "test");
 console.timeEnd(text);
 
 //? test 2 - get the value by key
-text = "get the value by key from object";
+text = "get the value by key from Object";
 console.time(text);
 result = obj[50];
 console.timeEnd(text);
 
-text = "get the value by key from object without proto";
+text = "get the value by key from Object without proto";
 console.time(text);
 objWithoutProto[50];
 console.timeEnd(text);
@@ -47,17 +47,17 @@ result = map.get(50);
 console.timeEnd(text);
 
 //? test 3 - remove key
-text = "remove key from small object";
+text = "remove key from Object";
 console.time(text);
 result = delete obj[50];
 console.timeEnd(text);
 
-text = "remove key from object without proto";
+text = "remove key from Object without proto";
 console.time(text);
 result = delete objWithoutProto[50];
 console.timeEnd(text);
 
-text = "remove key from small Map";
+text = "remove key from Map";
 console.time(text);
 result = map.delete(50);
 console.timeEnd(text);
@@ -68,7 +68,7 @@ console.time(text);
 result = Object.entries(obj);
 console.timeEnd(text);
 
-text = "convert object without proto to array";
+text = "convert Object without proto to array";
 console.time(text);
 result = Object.entries(objWithoutProto);
 console.timeEnd(text);
