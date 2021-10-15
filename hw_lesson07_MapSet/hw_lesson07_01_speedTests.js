@@ -1,6 +1,8 @@
+// Home work lesson 7.1 Map Set
+
 //const size = 100; // small
-//const size = 10000; // medium
-const size = 10000000; // large
+const size = 10000; // medium
+//const size = 10000000; // large
 let text, result;
 
 const obj = {};
@@ -78,26 +80,26 @@ console.time(text);
 result = Array.from(map, ([name, value]) => [name, value]);
 console.timeEnd(text);
 
-// convert Map to object
-const mapForConvert = new Map([
-  [true, 1],
-  [{}, 2],
-  ["test3", 3],
-]);
-
-function convertMapToObj(map) {
-  return map instanceof Map ? Object.fromEntries(map) : null;
+//? test 5 - iteration
+text = "Object iteration";
+console.time(text);
+for (let key in obj) {
+  result = "something";
 }
-// console.log(convertMapToObj(mapForConvert)); // output: { true: 1, '[object Object]': 2, test3: 3 }
+console.timeEnd(text);
 
-// convert Object to Map
-const objForConvert = {
-  test1: 1,
-  test2: 2,
-  test3: 3,
-};
-
-function convertObjToMap(obj) {
-  return typeof obj === "object" ? new Map(Object.entries(obj)) : null;
+text = "Object without proto iteration";
+console.time(text);
+for (let key in objWithoutProto) {
+  result = "something";
 }
-// console.log(objForConvert); // output: Map(3) { 'test1' => 1, 'test2' => 2, 'test3' => 3 }
+console.timeEnd(text);
+
+text = "Map iteration";
+console.time(text);
+result = map.forEach((val) => {
+  result = "something";
+});
+console.timeEnd(text);
+
+console.log("ALL TEST IS DONE!!!");
