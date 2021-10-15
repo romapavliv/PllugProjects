@@ -208,7 +208,7 @@ html {
         text-align: end;
         padding: 0 0;
         position: absolute;
-        @include adaptive-value('top', 180, 130);
+        @include adaptive-value('top', 150, 120);
         right: 0;
       }
 
