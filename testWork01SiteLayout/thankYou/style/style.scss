@@ -203,15 +203,6 @@ html {
         margin-right: auto;
       }
 
-      #forgot-pass-btn {
-        margin-left: auto;
-        text-align: end;
-        padding: 0 0;
-        position: absolute;
-        @include adaptive-value('top', 180, 130);
-        right: 0;
-      }
-
       .red-btn,
       .simple-btn {
         text-align: center;

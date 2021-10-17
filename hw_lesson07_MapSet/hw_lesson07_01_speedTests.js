@@ -1,7 +1,7 @@
 // Home work lesson 7.1 Map Set
 
-const size = 100; // small
-//const size = 10000; // medium
+//const size = 100; // small
+const size = 10000; // medium
 //const size = 10000000; // large
 let text, result;
 
