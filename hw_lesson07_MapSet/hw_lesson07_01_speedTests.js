@@ -125,3 +125,5 @@ Array.from(map).forEach(([key, val]) => {
 console.timeEnd(text);
 
 console.log("ALL TEST IS DONE!!!");
+
+Завдання виконано.
