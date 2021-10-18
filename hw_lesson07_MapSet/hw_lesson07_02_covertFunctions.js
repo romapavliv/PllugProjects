@@ -23,3 +23,5 @@ function convertObjToMap(obj) {
   return typeof obj === "object" ? new Map(Object.entries(obj)) : null;
 }
 // console.log(objForConvert); // output: Map(3) { 'test1' => 1, 'test2' => 2, 'test3' => 3 }
+
+Завдання виконано.
