@@ -30,13 +30,17 @@ export class StartComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  isAllSelected(item:any) {
+  isAllSelected(event:any, item: any) {
+
     this.checklist.forEach(val => {
-      if (val.id == item.id) val.isSelected = !val.isSelected;
-      else {
+      if (val.id == item.id) {
+        val.isSelected = !val.isSelected;
+      } else {
         val.isSelected = false;
       }
     });
+    console.log(this.checklist);
+    event.target.style.pointerEvents = "none";
   }
 
   startGame() {

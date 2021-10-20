@@ -23,6 +23,8 @@ export class WinComponent implements OnInit {
     //   steps: 9,
     //   time: 22
     // }
+    //! debug
+
     this.winUser = this.gameType.getUser();
     if (!this.winUser) {
       this.router.navigate(['/'])

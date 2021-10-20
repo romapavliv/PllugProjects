@@ -1,0 +1,46 @@
+.win-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgb(167, 167, 167) 0%, rgb(61, 61, 61) 100%);
+
+  .congratulations {
+    width:600px;
+    height: 350px;
+    background-color: var(--black-color);
+    color: var(--white-color);
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-content: space-around;
+    justify-content: space-evenly;
+    padding: 1rem;
+
+    &>h2{
+      font-size: 24px;
+      &>span{
+        color:var(--orange-color);
+      }
+    }
+    .congratulations__user-data {
+      width: 150px;
+      height: 40px;
+      background: var(--white-color);
+      color: var(--black-color);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &>.btn{
+      margin-top: 1rem;
+      width: 150px;
+      height: 50px;
+    }
+  }
+}

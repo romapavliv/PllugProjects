@@ -1,12 +1,12 @@
-<p>{{steps}}</p>
-<div class="cards">
-  <div class="cards__card" *ngFor="let urlImg of elements" (click)="rotateDiv($event)">
-    <div class="front face">
-    </div>
-    <div class="back face center">
-      <img src="{{urlImg}}" />
+<div class="game-content">
+  <!-- <p>{{steps}}</p> -->
+  <div class="game-content__cards">
+    <div class="cards__card" *ngFor="let urlImg of elements" (click)="rotateDiv($event)">
+      <div class="front face">
+      </div>
+      <div class="back face center">
+        <img src="{{urlImg}}" />
+      </div>
     </div>
   </div>
-
-
 </div>

@@ -1,20 +1,26 @@
 <div class="start-content">
-  <form [formGroup]='form' (ngSubmit)="startGame()">
+  <h1><span>CARD</span> GAME</h1>
+  <form class="start-content__form" [formGroup]='form' (ngSubmit)="startGame()">
     <label for="nickname">Enter your name</label>
-    <input type="nickname" formControlName="nickname">
+    <input type="text" name="nickname" formControlName="nickname">
     <div class="checkboxes">
-      <div class="checkboxes__checkbox" *ngFor="let item of checklist">
-        <input type="checkbox" value="{{item.id}}" name="{{item.value}}" [checked]="item.isSelected"
-          (change)="isAllSelected(item)" [ngStyle]="{'pointer-events': item.isSelected ? 'none':'all'}" />
-        <label for="{{item.value}}">{{item.value}}</label>
-
+      <div class="main checkboxes__checkbox" *ngFor="let item of checklist">
+        <label [ngStyle]="{'pointer-events': item.isSelected ? 'none':'all'}">
+          <input type="checkbox" value="{{item.id}}" name="{{item.value}}" [checked]="item.isSelected"
+            (change)="isAllSelected($event,item)" />
+          <span class="geek-mark"></span>
+          {{item.value}}
+        </label>
       </div>
-      <label for="numberOfCard">Card</label>
-      <select name="numberOfCard" formControlName="numberOfCard">
-        <option value="10">10</option>
-        <option value="20">20</option>
-      </select>
+      <div class="checkboxes__select">
+        <label for="numberOfCard">Card
+          <select name="numberOfCard" formControlName="numberOfCard">
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+        </label>
+      </div>
     </div>
-    <button type="submit" [disabled]="form.invalid">Start game</button>
+    <button class="btn" type="submit" [disabled]="form.invalid">Start game</button>
   </form>
 </div>

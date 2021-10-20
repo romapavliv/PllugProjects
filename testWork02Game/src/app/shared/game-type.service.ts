@@ -53,7 +53,9 @@ export class GameTypeService {
 
   getCards() {
      if (this.userData) {
-      const cardType = this.cards[this.userData.cardType].slice(0, +this.userData.numberOfCard / 2)
+      const cardType = this.cards[this.userData.cardType]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, +this.userData.numberOfCard / 2)
       return [...cardType, ...cardType].sort(() => Math.random() - 0.5);
     }
     this.router.navigate(['/'])
