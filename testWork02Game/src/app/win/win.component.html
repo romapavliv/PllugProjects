@@ -1,1 +1,15 @@
-<p>win works!</p>
+<div class="win-content">
+  <div class="congratulations-block" *ngIf="winUser">
+    <h2>Congratulations {{winUser.name}}, you are winner</h2>
+    <p>Steps:</p>
+    <div class="win-content__user-data">
+      <span>{{winUser.steps}}</span>
+    </div>
+    <p>Time:</p>
+    <div class="win-content__user-data">
+      <span>{{winUser.time}}</span>
+    </div>
+  </div>
+
+
+</div>
