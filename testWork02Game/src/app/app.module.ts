@@ -1,21 +1,23 @@
-import { NgModule } from '@angular/core';
+import {  NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { MainPageComponent } from './main-page/main-page.component';
-import { GamePageComponent } from './game-page/game-page.component';
+import {  StartComponent } from './start/start.component';
+import { GameComponent } from './game/game.component';
 import { WinComponent } from './win/win.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent,
-    GamePageComponent,
+    StartComponent,
+    GameComponent,
     WinComponent,
 
    ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
