@@ -6,7 +6,9 @@ import {  StartComponent } from './start/start.component';
 import { GameComponent } from './game/game.component';
 import { WinComponent } from './win/win.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {  RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 const routes: Routes = [
   {
     path: '', component: AppComponent, children: [
@@ -25,6 +27,7 @@ const routes: Routes = [
     WinComponent,
    ],
   imports: [
+    BrowserAnimationsModule ,
     BrowserModule,
     ReactiveFormsModule,
     [RouterModule.forRoot(routes)]

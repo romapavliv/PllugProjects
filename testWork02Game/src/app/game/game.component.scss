@@ -4,29 +4,63 @@
   height: 100%;
   background: radial-gradient(circle, rgba(231, 232, 234, 1) 0%, rgba(152, 152, 152, 1) 100%);
 
+  &__panel-info {
+    background-color: var(--black-color);
+    color: var(--white-color);
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 150px;
+    width: 200px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    border-bottom-right-radius: 12px;
+    box-shadow: 0px 1px 0px rgb(54, 54, 54), 0px 2px 0px #363636, 0px 3px 0px rgb(53, 53, 53), 0px 4px 0px #292929, 0px 5px 0px rgb(37, 37, 37), 0px 6px 1px rgba(0, 0, 0, 0.1), 0px 0px 5px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 3px 5px rgba(0, 0, 0, 0.2), -4px 8px 8px rgba(0, 0, 0, 0.1), -8px 16px 16px rgba(0, 0, 0, 0.37), -16px 32px 32px rgba(0, 0, 0, 0.25), -32px 64px 64px rgba(0, 0, 0, 0.25);
+
+
+    &>h3 {
+      &>span {
+        color: var(--orange-color);
+      }
+    }
+  }
 
   &__cards {
     width: 900px;
-    height: 100vh;
-    //border: 1px solid red;
+    /* height: 100vh; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     padding: 1rem;
-    margin: 0 auto;
     justify-content: center;
     align-content: flex-start;
-    background: white;
+    background: var(--gray-color);
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 1px 0px rgb(54, 54, 54), 0px 2px 0px #363636, 0px 3px 0px rgb(53, 53, 53), 0px 4px 0px #292929, 0px 5px 0px rgb(37, 37, 37), 0px 6px 1px rgba(0, 0, 0, 0.1), 0px 0px 5px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 3px 5px rgba(0, 0, 0, 0.2), -4px 8px 8px rgba(0, 0, 0, 0.1), -8px 16px 16px rgba(0, 0, 0, 0.37), -16px 32px 32px rgba(0, 0, 0, 0.25), -32px 64px 64px rgba(0, 0, 0, 0.25);
+
     .cards__card {
+      box-shadow: 0px 1px 0px rgb(54, 54, 54), 0px 2px 0px #363636, 0px 3px 0px rgb(53, 53, 53), 0px 4px 0px #292929, 0px 5px 0px rgb(80, 80, 80), 0px 6px 1px rgba(0, 0, 0, 0.1), 0px 0px 5px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 3px 5px rgba(0, 0, 0, 0.2), -4px 8px 8px rgba(0, 0, 0, 0.1), -8px 16px 16px rgba(0, 0, 0, 0.37);
+      //box-shadow: 0px 1px 0px rgb(54, 54, 54), 0px 2px 0px #363636, 0px 3px 0px rgb(53, 53, 53), 0px 4px 0px #292929, 0px 5px 0px rgb(80, 80, 80), 0px 6px 1px rgba(0, 0, 0, 0.1), 0px 0px 5px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 3px 5px rgba(0, 0, 0, 0.2), -4px 8px 8px rgba(0, 0, 0, 0.1), -8px 16px 16px rgba(0, 0, 0, 0.37), -16px 32px 32px rgba(0, 0, 0, 0.25), -32px 64px 64px rgba(0, 0, 0, 0.25);
+      //box-shadow: 0px 1px 2px rgb(100, 100, 100), 0px 1px 3px rgb(80, 80, 80), 0px 2px 3px #585858, 0px 2px 5px #3f3f3f, 0px 3px 5px rgb(87, 87, 87), 0px 4px 6px #4e4e4e, 0px 5px 2px rgb(59, 59, 59), 0px 6px 2px #252525, 0px 7px 2px rgb(58, 58, 58), 0px 7px 2px rgba(0, 0, 0, 0.5), 0px 7px 2px rgba(0, 0, 0, 0.1), 0px 7px 2px rgba(0, 0, 0, 0.73), 0px 0px 5px rgba(255, 255, 255, 0.3), 0px 0px 6px rgba(255, 255, 255, 1), 0px 0px 5px rgba(255, 255, 255, 1), 0px 0px 5px rgba(255, 255, 255, 0.1);
       width: 150px;
       height: 150px;
       transform-style: preserve-3d;
       transition: all .7s linear;
       margin: .5rem;
+      background: url('https://images.unsplash.com/photo-1609709688557-a8990f3ba16b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80') 50% 20%/cover;
       //background: url('https://images.unsplash.com/photo-1525642351754-db88d9142dee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=327&q=80') 50% 40%/cover;
-      background: var(--black-color);
-      border-radius: 5px;
 
+      //background: var(--black-color);
+      border-radius: 8px;
+      //color: rgba(73, 73, 73, 0);
       .face {
         position: absolute;
         width: 100%;
@@ -44,6 +78,7 @@
         height: 100%;
 
         img {
+          border-radius: 8px;
           background-repeat: no-repeat;
           width: 151px;
           height: 151px;
@@ -52,14 +87,5 @@
         }
       }
     }
-  }
-
-  .rotate {
-    transform: rotateY(180deg);
-    //box-shadow: -5px 5px 5px #aaa;
-  }
-
-  .invalid {
-    background: white;
   }
 }

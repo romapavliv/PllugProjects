@@ -39,7 +39,6 @@ export class StartComponent implements OnInit {
         val.isSelected = false;
       }
     });
-    console.log(this.checklist);
     event.target.style.pointerEvents = "none";
   }
 
@@ -54,8 +53,6 @@ export class StartComponent implements OnInit {
       cardType: this.checklist.filter((el) => el.isSelected === true).shift().value
     }
     this.gameType.setUserData(user);
-    console.log(user);
-
     this.router.navigate(['/game'])
   }
 }
