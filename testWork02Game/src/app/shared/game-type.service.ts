@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameTypeService {
-  userData:any
+  userData!:User
 
   cards: any = {
     Fruits: [
@@ -47,7 +48,7 @@ export class GameTypeService {
   }
   constructor(private router:Router) { }
 
-  setUserData(user: any) {
+  setUserData(user: User) {
     this.userData = user
   }
 

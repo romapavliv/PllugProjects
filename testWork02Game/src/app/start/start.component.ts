@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GameTypeService } from '../shared/game-type.service';
+import { User } from '../shared/interfaces';
 
 @Component({
   selector: 'app-start',
@@ -47,8 +48,8 @@ export class StartComponent implements OnInit {
       return;
     }
 
-    const user = {
-      name: this.form.get('nickname')?.value,
+    const user:User = {
+      nickname: this.form.get('nickname')?.value,
       numberOfCard:this.form.get('numberOfCard')?.value,
       cardType: this.checklist.filter((el) => el.isSelected === true).shift().value
     }

@@ -1,6 +1,6 @@
 <div class="win-content">
   <div class="congratulations" *ngIf="winUser">
-    <h2>Congratulations <span>{{winUser.name}}</span>, you are winner</h2>
+    <h2>Congratulations <span>{{winUser.nickname}}</span>, you are winner</h2>
     <p>Steps:</p>
     <div class="congratulations__user-data">
       <span>{{winUser.steps}}</span>
@@ -10,5 +10,28 @@
       <span>{{winUser.time}} sec</span>
     </div>
     <button routerLink="/" class="btn">Restart</button>
+  </div>
+  <div class="all-results">
+    <p>RECORDS</p>
+    <div class="records-buttons">
+      <button class="rec-but" (click)="changeRecordsData(10)">10</button>
+      <button class="rec-but" (click)="changeRecordsData(20)">20</button>
+    </div>
+    <table style="width:100%">
+      <tr>
+        <th class="place">Place</th>
+        <th class="nick"> Nick</th>
+        <th class="time">Time</th>
+        <th class="step">Step</th>
+      </tr>
+      <tr *ngFor="let item of currentResults; let idx = index">
+        <td class="place">{{idx+1}}</td>
+        <td class="nick">{{item.nickname}}</td>
+        <td class="time">{{item.time}} sec</td>
+        <td class="step">{{item.steps}}</td>
+      </tr>
+
+    </table>
+
   </div>
 </div>

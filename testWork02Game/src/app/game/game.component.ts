@@ -2,6 +2,7 @@ import { Component, OnDestroy  } from '@angular/core';
 import { Router } from '@angular/router';
 import { rotateCard } from '../shared/animations';
 import { GameTypeService } from '../shared/game-type.service';
+import { User } from '../shared/interfaces';
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -11,10 +12,11 @@ import { GameTypeService } from '../shared/game-type.service';
 export class GameComponent implements OnDestroy  {
   cardsState :Array<string> = []
   elements: Array<string> = [];
-  userData!:any
+  userData!:User
+  timer!:ReturnType<typeof setTimeout>
   steps: number = 0;
-  time: any = 0;
-  timer!:any
+  time: number = 0;
+
   constructor(
     private gameType: GameTypeService,
     private router: Router

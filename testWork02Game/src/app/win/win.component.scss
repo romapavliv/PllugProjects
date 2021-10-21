@@ -47,4 +47,73 @@
       height: 50px;
     }
   }
+
+  .all-results {
+    width: 400px;
+    height: 400px;
+    background-color: var(--black-color);
+    color: var(--white-color);
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-bottom-left-radius: 30px;
+    // display: flex;
+    // align-items: center;
+    // flex-direction: column;
+    // align-content: space-around;
+    // justify-content: space-evenly;
+    padding: 1rem;
+    box-shadow: 0px 1px 0px rgb(54, 54, 54), 0px 2px 0px #363636, 0px 3px 0px rgb(53, 53, 53), 0px 4px 0px #292929, 0px 5px 0px rgb(37, 37, 37), 0px 6px 1px rgba(0, 0, 0, 0.1), 0px 0px 5px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 3px 5px rgba(0, 0, 0, 0.2), -4px 8px 8px rgba(0, 0, 0, 0.1), -8px 16px 16px rgba(0, 0, 0, 0.37), -16px 32px 32px rgba(0, 0, 0, 0.25), -32px 64px 64px rgba(0, 0, 0, 0.25);
+
+    &>p {
+      text-align: center;
+      color: var(--orange-color);
+      font-size: 24px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .records-buttons {
+      &>.rec-but {
+        width: 80px;
+        height: 25px;
+        border-radius: 20px 20px 0 0;
+        color: var(--black-color);
+        font-weight: 500;
+        font-size: 20px;
+        background-color: var(--dark-gray-color);
+        &:hover{
+          background-color: #adadad;
+        }
+      }
+    }
+
+    &>table {
+      th {
+        text-align: start;
+        color: var(--dark-gray-color);
+
+      }
+
+      td {
+        text-align: start;
+      }
+
+      .place {
+        width: 60px;
+      }
+
+      .nick {
+        width: 140px;
+      }
+
+      .time {
+        width: 90px;
+      }
+
+      .step {
+        width: 60px;
+      }
+    }
+  }
 }
