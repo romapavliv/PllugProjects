@@ -1,21 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { hideRecords, rotateBtn } from '../shared/animations';
 import { GameTypeService } from '../shared/game-type.service';
 import { User } from '../shared/interfaces';
+import { RecordsService } from '../shared/records.service';
 
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
-  styleUrls: ['./start.component.scss']
+  styleUrls: ['./start.component.scss'],
+  animations:[hideRecords, rotateBtn]
 })
 export class StartComponent implements OnInit {
   public checklist: any[];
   form!:FormGroup
+  currentResults:Array<User> =[]
+  resultsFor10Cards:Array<User> =[]
+  resultsFor20Cards:Array<User> =[]
+  buttonsActive = true;
+  recordsState = 'hide'
+  rotateBtnState = 'start'
 
   constructor(
     private gameType: GameTypeService,
     private router: Router,
+    private recordsService: RecordsService
   ) {
     this.checklist = [
       { id: 1, value: "Fruits", isSelected: true },
@@ -26,10 +36,24 @@ export class StartComponent implements OnInit {
       nickname: new FormControl(null, [Validators.required, Validators.minLength(2)]),
       numberOfCard: new FormControl(20)
     })
+    this.recordsService.getRecord().subscribe((allResults) => {
+      this.resultsFor10Cards = this.sortData(allResults, 10)
+      this.resultsFor20Cards = this.sortData(allResults, 20)
+      this.currentResults = this.resultsFor10Cards
+    }, (err) => {
+
+    })
   }
+
+
 
   ngOnInit(): void {
 
+  }
+
+  refreshNickname() {
+    this.rotateBtnState = this.rotateBtnState === 'end' ? 'start' : 'end';
+    this.form.get('nickname')?.reset()
   }
   isAllSelected(event:any, item: any) {
 
@@ -55,5 +79,15 @@ export class StartComponent implements OnInit {
     }
     this.gameType.setUserData(user);
     this.router.navigate(['/game'])
+  }
+
+  changeRecordsData(numberOfCard: number) {
+    this.buttonsActive = numberOfCard === 10 ? true : false
+    numberOfCard === 10 ? this.currentResults = this.resultsFor10Cards : this.currentResults = this.resultsFor20Cards
+  }
+  sortData(results:Array<User> ,numberOfCard:number) {
+    return results.filter((result) => +result.numberOfCard === numberOfCard)
+      .sort((a: User, b: User) => a.time! - b.time!)
+      .slice(0, 10);
   }
 }

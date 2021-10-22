@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { rotateCard } from '../shared/animations';
 import { GameTypeService } from '../shared/game-type.service';
 import { User } from '../shared/interfaces';
+import { RecordsService } from '../shared/records.service';
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -19,7 +20,9 @@ export class GameComponent implements OnDestroy  {
 
   constructor(
     private gameType: GameTypeService,
-    private router: Router
+    private router: Router,
+    private recordsService: RecordsService
+
   ) {
     // this.elements = [
     //   'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg',
@@ -62,8 +65,11 @@ export class GameComponent implements OnDestroy  {
         this.guessedCards()
         this.cardsState = this.cardsState.map((card) => card === 'rotate'? card = 'start':card)
         if (this.winCheck()) {
-           this.gameType.addDataToUser(this.steps, this.time)
-           this.router.navigate(['/win'])
+          this.gameType.addDataToUser(this.steps, this.time)
+
+          this.recordsService.setRecord(this.gameType.getUser()).subscribe(() => {
+             this.router.navigate(['/win'])
+          })
         }
       },1000)
     }

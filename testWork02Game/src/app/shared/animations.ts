@@ -32,4 +32,37 @@ export const rotateCard = [
       style({ transition:' rotateY(0deg)', offset: .2 }),
     ]))),
   ]),
-  ]
+]
+
+export const hideRecords = [
+    trigger('hideRecords', [
+    state('hide', style({
+      transform: 'translateY(-110%)'
+    })),
+    state('show', style({
+      transform: 'translateY(0)'
+    })),
+
+    transition('*<=>*', [
+      animate(600),
+    ]),
+  ]),
+]
+export const rotateBtn = [
+    trigger('rotateBtn', [
+    state('start', style({
+      transform: 'rotate(0deg)'
+    })),
+    state('end', style({
+      transform: 'rotate(0deg)'
+    })),
+
+    transition('start<=>end', [
+      animate(1000, keyframes([
+      style({transform: 'rotate(-360deg)', pointerEvents: 'none', offset: 0 }),
+
+      style({transform: 'rotate(0deg)', pointerEvents: 'none', offset: 1 }),
+    ])),
+    ]),
+  ]),
+]

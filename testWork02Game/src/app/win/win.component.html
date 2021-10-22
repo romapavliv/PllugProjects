@@ -14,8 +14,9 @@
   <div class="all-results">
     <p>RECORDS</p>
     <div class="records-buttons">
-      <button class="rec-but" (click)="changeRecordsData(10)">10</button>
-      <button class="rec-but" (click)="changeRecordsData(20)">20</button>
+      <p>Cards:</p>
+      <button class="rec-but" [ngClass]="{'active': buttonsActive}" (click)="changeRecordsData(10)">10</button>
+      <button class="rec-but" [ngClass]="{'active': !buttonsActive}" (click)="changeRecordsData(20)">20</button>
     </div>
     <table style="width:100%">
       <tr>

@@ -24,6 +24,40 @@
     &>label {
       font-size: 24px;
       font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      height: 90px;
+      position: relative;
+
+      &>.ref-btn {
+        background: url('/assets/img/ico/refresh.png') 0 0 / cover;
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        top: 53px;
+        right: 5px;
+      }
+
+      &>input[type=text] {
+        border-radius: 8px;
+        padding: 0 35px ;
+        width: 100%;
+        height: 40px;
+        transition: border .2s ease-in-out;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+
+        &::placeholder {
+          color: var(--gray-color);
+        }
+
+        &:focus {
+          border: 1px solid var(--input-active-color);
+        }
+      }
     }
 
     .checkboxes {
@@ -83,25 +117,6 @@
       }
     }
 
-    &>input[type=text] {
-      border-radius: 8px;
-      padding: 0 16px;
-      width: 60%;
-      height: 40px;
-      transition: border .2s ease-in-out;
-      font-size: 20px;
-      font-weight: 600;
-      text-align: center;
-
-      &::placeholder {
-        color: var(--gray-color);
-      }
-
-      &:focus {
-        border: 1px solid var(--input-active-color);
-      }
-    }
-
     .checkboxes__select {
       margin-left: 1rem;
 
@@ -125,6 +140,8 @@
     position: absolute;
     top: 50px;
     left: 50%;
+    cursor: pointer;
+    user-select: none;
     transform: translateX(-50%);
     text-shadow: 1px 1px 1px #919191,
       1px 2px 1px #686868,
@@ -136,8 +153,126 @@
       1px 30px 60px rgba(16, 16, 16, 0.4);
     color: var(--dark-color);
 
-    &>span {
+    & :nth-child(-n+4) {
       color: var(--orange-color);
     }
+
+
+    &>span {
+      transition: all .4s ease;
+      display: inline-block;
+
+      &:hover {
+        transform: scale(1.2);
+
+      }
+    }
+  }
+
+  .all-results {
+    width: 400px;
+    height: 400px;
+    background-color: var(--black-color);
+    color: var(--white-color);
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-bottom-left-radius: 30px;
+    padding: 1rem;
+    box-shadow: 0px 1px 0px rgb(54, 54, 54), 0px 2px 0px #363636, 0px 3px 0px rgb(53, 53, 53), 0px 4px 0px #292929, 0px 5px 0px rgb(37, 37, 37), 0px 6px 1px rgba(0, 0, 0, 0.1), 0px 0px 5px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 3px 5px rgba(0, 0, 0, 0.2), -4px 8px 8px rgba(0, 0, 0, 0.1), -8px 16px 16px rgba(0, 0, 0, 0.37), -16px 32px 32px rgba(0, 0, 0, 0.25), -32px 64px 64px rgba(0, 0, 0, 0.25);
+    transform: translateY(-110%);
+
+    &>p {
+      text-align: center;
+      color: var(--orange-color);
+      font-size: 24px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .records-buttons {
+      &>p {
+        display: inline;
+      }
+
+      &>.rec-but {
+        width: 80px;
+        height: 25px;
+        border-radius: 20px 20px 0 0;
+        color: var(--black-color);
+        font-weight: 700;
+        font-size: 20px;
+        background-color: var(--dark-gray-color);
+        margin: 0 5px;
+
+        &:hover {
+          background-color: #adadad;
+        }
+      }
+
+      .active {
+        background-color: var(--orange-color);
+
+        &:hover {
+          background-color: var(--orange-hover-color);
+        }
+      }
+    }
+
+    &>table {
+      th {
+        text-align: start;
+        color: var(--dark-gray-color);
+      }
+
+      td {
+        text-align: start;
+      }
+
+      .place,
+      .step {
+        width: 60px;
+      }
+
+      .nick {
+        width: 140px;
+      }
+
+      .time {
+        width: 90px;
+      }
+    }
+  }
+}
+
+.cup-btn {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: url('/assets/img/ico/cup.png') 0 0 / cover;
+  z-index: 2;
+
+  .badge {
+    animation: pulse 2s infinite;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ffa800;
+    z-index: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+    transform: scale(0.6);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2);
+
   }
 }

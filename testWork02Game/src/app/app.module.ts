@@ -8,6 +8,7 @@ import { WinComponent } from './win/win.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
     BrowserAnimationsModule ,
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
     [RouterModule.forRoot(routes)]
   ],
   providers: [],
