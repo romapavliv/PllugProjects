@@ -38,7 +38,7 @@ export class WinComponent implements OnInit {
       this.resultsFor20Cards = this.sortData(allResults, 20)
       this.currentResults = this.resultsFor10Cards
     }, (err) => {
-      
+
     })
 
     if (!this.winUser) {

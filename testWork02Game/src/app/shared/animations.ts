@@ -37,7 +37,7 @@ export const rotateCard = [
 export const hideRecords = [
     trigger('hideRecords', [
     state('hide', style({
-      transform: 'translateY(-110%)'
+      transform: 'translateY(-115%)'
     })),
     state('show', style({
       transform: 'translateY(0)'

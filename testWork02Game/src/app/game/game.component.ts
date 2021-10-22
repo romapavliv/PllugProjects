@@ -39,13 +39,11 @@ export class GameComponent implements OnDestroy  {
     // this.userData = {
     //   name: 'Taras', numberOfCard: '10', cardType: 'Fruits'
     // }
-    //! Debug
+    // !Debug
     this.elements = this.gameType.getCards();
     this.userData = this.gameType.getUser();
     this.cardsState.length = this.elements.length;
     this.cardsState.fill('start', 0, this.elements.length);
-    console.log(this.userData);
-
     this.gameStart()
   }
 

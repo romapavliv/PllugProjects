@@ -46,6 +46,7 @@
 
   <div class="all-results" [@hideRecords]="recordsState">
     <p>RECORDS</p>
+    <button class="hide-btn" (click)="recordsState = recordsState === 'hide'? 'show': 'hide'"></button>
     <div class="records-buttons">
       <p>Cards:</p>
       <button class="rec-but" type="button" [ngClass]="{'active': buttonsActive}"
