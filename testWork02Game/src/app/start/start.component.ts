@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { hideRecords, rotateBtn } from '../shared/animations';
@@ -10,7 +10,7 @@ import { RecordsService } from '../shared/records.service';
   selector: 'app-start',
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.scss'],
-  animations:[hideRecords, rotateBtn]
+  animations: [hideRecords, rotateBtn],
 })
 export class StartComponent implements OnInit {
   public checklist: any[];
@@ -20,12 +20,14 @@ export class StartComponent implements OnInit {
   resultsFor20Cards:Array<User> =[]
   buttonsActive = true;
   recordsState = 'hide'
-  rotateBtnState = 'start'
+  rotateBtnState = 'start';
+
 
   constructor(
     private gameType: GameTypeService,
     private router: Router,
-    private recordsService: RecordsService
+    private recordsService: RecordsService,
+    private _eref: ElementRef,
   ) {
     this.checklist = [
       { id: 1, value: "Fruits", isSelected: true },
@@ -90,4 +92,5 @@ export class StartComponent implements OnInit {
       .sort((a: User, b: User) => a.time! - b.time!)
       .slice(0, 10);
   }
+
 }

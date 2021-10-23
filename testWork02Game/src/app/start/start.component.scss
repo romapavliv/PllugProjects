@@ -1,8 +1,9 @@
 .start-content {
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background: radial-gradient(circle, rgba(231, 232, 234, 1) 0%, rgba(152, 152, 152, 1) 100%);
+  overflow: auto;
 
   &__form {
     width: 500px;
@@ -152,11 +153,11 @@
       1px 25px 35px rgba(16, 16, 16, 0.2),
       1px 30px 60px rgba(16, 16, 16, 0.4);
     color: var(--dark-color);
+    white-space: nowrap;
 
     & :nth-child(-n+4) {
       color: var(--orange-color);
     }
-
 
     &>span {
       transition: all .4s ease;
@@ -203,7 +204,7 @@
         font-weight: 700;
         font-size: 20px;
         background-color: var(--dark-gray-color);
-        margin: 0 5px;
+        margin: 0 3px;
 
         &:hover {
           background-color: #adadad;
@@ -292,12 +293,116 @@
   100% {
     opacity: 0;
     transform: scale(2);
-
   }
 }
 
-@media(max-width:1200px) {}
+@media(max-width:992px) {
+  .start-content {
+    &>h1 {
+      font-size: 60px;
+    }
+  }
+}
 
-@media(max-width:992px) {}
+@media(max-width:767px) {
+  .start-content {
+    &>h1 {
+      font-size: 40px;
+    }
 
-@media(max-width:767px) {}
+    &__form {
+      width: 310px;
+      height: 300px;
+      top: 170px;
+
+      &>label {
+        font-size: 20px;
+        height: 90px;
+
+        &>.ref-btn {
+          width: 25px;
+          height: 25px;
+          top: 61px;
+          right: 30px;
+        }
+
+        &>input[type=text] {
+          padding: 0 27px;
+          width: 80%;
+          height: 30px;
+          font-size: 18px;
+        }
+      }
+
+      .checkboxes {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        &__checkbox {
+          &>label {
+            font-size: 18px;
+            margin-bottom: 5px;
+
+            &>input[type=checkbox] {
+              margin-left: 3px;
+            }
+          }
+        }
+      }
+
+      .checkboxes__select {
+        margin-left: 1rem;
+        position: absolute;
+        right: 15px;
+        top: 159px;
+
+        &>label {
+          margin-bottom: 5px;
+
+          select {
+            height: 25px;
+            font-size: 22px;
+          }
+        }
+      }
+    }
+
+    .all-results {
+      width: 310px;
+
+      &>p {
+        font-size: 22px;
+      }
+
+      &>table {
+        th {
+          text-align: start;
+          color: var(--dark-gray-color);
+        }
+
+        td {
+          text-align: start;
+        }
+
+        .place,
+        .step {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .cup-btn {
+    width: 40px;
+    height: 40px;
+    top: 20px;
+    right: 20px;
+
+    .badge {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
