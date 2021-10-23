@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { hideRecords } from '../shared/animations';
 import { GameTypeService } from '../shared/game-type.service';
 import { User } from '../shared/interfaces';
 import { RecordsService } from '../shared/records.service';
@@ -7,7 +8,8 @@ import { RecordsService } from '../shared/records.service';
 @Component({
   selector: 'app-win',
   templateUrl: './win.component.html',
-  styleUrls: ['./win.component.scss']
+  styleUrls: ['./win.component.scss'],
+  animations: [hideRecords],
 })
 export class WinComponent implements OnInit {
   currentResults:Array<User> =[]
@@ -15,6 +17,7 @@ export class WinComponent implements OnInit {
   resultsFor20Cards:Array<User> =[]
   buttonsActive = true;
   winUser!: User
+  recordsState = 'hide'
 
   constructor(
     private gameType: GameTypeService,
@@ -23,16 +26,16 @@ export class WinComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.winUser  = {
-    //   cardType: "Fruits",
-    //   nickname: "Taras",
-    //   numberOfCard: "20",
-    //   steps: 9,
-    //   time: 22
-    // }
+    this.winUser  = {
+      cardType: "Fruits",
+      nickname: "Taras",
+      numberOfCard: "20",
+      steps: 9,
+      time: 22
+    }
     //!Debug
 
-    this.winUser = this.gameType.getUser();
+    //this.winUser = this.gameType.getUser();
     this.recordsService.getRecord().subscribe((allResults) => {
       this.resultsFor10Cards = this.sortData(allResults, 10)
       this.resultsFor20Cards = this.sortData(allResults, 20)

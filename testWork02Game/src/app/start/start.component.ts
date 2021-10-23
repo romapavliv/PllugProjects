@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { hideRecords, rotateBtn } from '../shared/animations';
@@ -22,12 +22,10 @@ export class StartComponent implements OnInit {
   recordsState = 'hide'
   rotateBtnState = 'start';
 
-
   constructor(
     private gameType: GameTypeService,
     private router: Router,
     private recordsService: RecordsService,
-    private _eref: ElementRef,
   ) {
     this.checklist = [
       { id: 1, value: "Fruits", isSelected: true },
