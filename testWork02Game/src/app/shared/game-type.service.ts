@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { User } from './interfaces';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameTypeService {
-  userData!:User
-
+  userData!: User;
   cards: any = {
     Fruits: [
       '/assets/img/fruits/1.jpg',
@@ -49,27 +50,27 @@ export class GameTypeService {
 
   constructor(private router:Router) { }
 
-  setUserData(user: User) {
-    this.userData = user
+  setUserData(user: User): void {
+    this.userData = user;
   }
 
-  getCards() {
+  getCards(): Array<string> {
      if (this.userData) {
-      const cardType = this.cards[this.userData.cardType]
-        .sort(() => Math.random() - 0.5)
-        .slice(0, +this.userData.numberOfCard / 2)
+       const cardType = this.cards[this.userData.cardType]
+         .sort(() => Math.random() - 0.5)
+         .slice(0, +this.userData.numberOfCard / 2);
       return [...cardType, ...cardType].sort(() => Math.random() - 0.5);
     }
     this.router.navigate(['/'])
-    return []
+    return [];
   }
 
-  addDataToUser(steps: number, time: any) {
+  addDataToUser(steps: number, time: any): void {
     this.userData.steps = steps;
     this.userData.time = time;
   }
 
   getUser() {
-    return this.userData
+    return this.userData;
   }
 }

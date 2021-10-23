@@ -1,7 +1,7 @@
-import { Target } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { hideRecords, rotateBtn } from '../shared/animations';
 import { GameTypeService } from '../shared/game-type.service';
 import { User } from '../shared/interfaces';
@@ -13,14 +13,14 @@ import { RecordsService } from '../shared/records.service';
   styleUrls: ['./start.component.scss'],
   animations: [hideRecords, rotateBtn],
 })
-export class StartComponent implements OnInit {
-  public checklist: any[];
-  form!:FormGroup
-  currentResults:Array<User> =[]
-  resultsFor10Cards:Array<User> =[]
-  resultsFor20Cards:Array<User> =[]
+export class StartComponent {
+  checklist: Array<any>;
+  form: FormGroup;
+  currentResults: Array<User> = [];
+  resultsFor10Cards: Array<User> = [];
+  resultsFor20Cards: Array<User> = [];
   buttonsActive = true;
-  recordsState = 'hide'
+  recordsState = 'hide';
   rotateBtnState = 'start';
 
   constructor(
@@ -29,35 +29,27 @@ export class StartComponent implements OnInit {
     private recordsService: RecordsService,
   ) {
     this.checklist = [
-      { id: 1, value: "Fruits", isSelected: true },
-      { id: 2, value: "Animals", isSelected: false },
-      { id: 3, value: "Cars", isSelected: false }
+      { id: 1, value: 'Fruits', isSelected: true },
+      { id: 2, value: 'Animals', isSelected: false },
+      { id: 3, value: 'Cars', isSelected: false },
     ];
     this.form = new FormGroup({
       nickname: new FormControl(null, [Validators.required, Validators.minLength(2)]),
       numberOfCard: new FormControl(20)
     })
     this.recordsService.getRecord().subscribe((allResults) => {
-      this.resultsFor10Cards = this.sortData(allResults, 10)
-      this.resultsFor20Cards = this.sortData(allResults, 20)
-      this.currentResults = this.resultsFor10Cards
-    }, (err) => {
-
+      this.resultsFor10Cards = this.sortData(allResults, 10);
+      this.resultsFor20Cards = this.sortData(allResults, 20);
+      this.currentResults = this.resultsFor10Cards;
     })
   }
 
-
-
-  ngOnInit(): void {
-
-  }
-
-  refreshNickname() {
+  refreshNickname():void {
     this.rotateBtnState = this.rotateBtnState === 'end' ? 'start' : 'end';
-    this.form.get('nickname')?.reset()
+    this.form.get('nickname')?.reset();
   }
-  isAllSelected(event:any, item: any) {
 
+  isAllSelected(event: Event|any, item: any) {
     this.checklist.forEach(val => {
       if (val.id == item.id) {
         val.isSelected = !val.isSelected;
@@ -65,49 +57,49 @@ export class StartComponent implements OnInit {
         val.isSelected = false;
       }
     });
-    event.target.style.pointerEvents = "none";
+    event.target.style.pointerEvents = 'none';
   }
 
-  startGame() {
+  startGame(): void {
     if (this.form.invalid) {
       return;
     }
 
-    const user:User = {
+    const user: User = {
       nickname: this.form.get('nickname')?.value,
       numberOfCard:this.form.get('numberOfCard')?.value,
-      cardType: this.checklist.filter((el) => el.isSelected === true).shift().value
+      cardType: this.checklist.filter((el) => el.isSelected === true).shift().value,
     }
     this.gameType.setUserData(user);
-    this.router.navigate(['/game'])
+    this.router.navigate(['/game']);
   }
 
-  changeRecordsData(numberOfCard: number) {
-    this.buttonsActive = numberOfCard === 10 ? true : false
-    numberOfCard === 10 ? this.currentResults = this.resultsFor10Cards : this.currentResults = this.resultsFor20Cards
+  changeRecordsData(numberOfCard: number): void {
+    this.buttonsActive = numberOfCard === 10 ? true : false;
+    numberOfCard === 10 ? this.currentResults = this.resultsFor10Cards : this.currentResults = this.resultsFor20Cards;
   }
 
-  sortData(results:Array<User> ,numberOfCard:number) {
+  sortData(results:Array<User> ,numberOfCard:number): Array<User> {
     return results.filter((result) => +result.numberOfCard === numberOfCard)
       .sort((a: User, b: User) => a.time! - b.time!)
       .slice(0, 10);
   }
 
-  outsideClick(event:Event|any) {
+  outsideClick(event:Event|any): void {
     let target = event.target;
 
     while (!target.classList.contains('start-content')) {
       if (target.classList.contains('all-results') || target.classList.contains('cup-btn') ) {
-        return
+        return;
       }
       target = target.offsetParent;
       if (!target) break;
     }
-    this.recordsState = this.recordsState === 'show'? 'hide': 'hide'
+    this.recordsState = this.recordsState === 'show' ? 'hide' : 'hide';
   }
-  nicknameInputFilter() {
-    let inputValue: string = this.form.get('nickname')?.value
-    inputValue = inputValue.replace(/[^A-Za-z]/gi, "");
+  nicknameInputFilter(): void {
+    let inputValue: string = this.form.get('nickname')?.value;
+    inputValue = inputValue.replace(/[^A-Za-z0-9]/gi, '');
     this.form.get('nickname')?.setValue(inputValue);
   }
 }

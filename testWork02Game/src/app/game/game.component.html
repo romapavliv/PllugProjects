@@ -1,5 +1,5 @@
 <div class="game-content">
-  <div class="game-content__panel-info">
+  <div class="game-content__panel-info" *ngIf="userData">
     <h3>Player: <span>{{userData.nickname}}</span></h3>
     <p>Timer: <span>{{time}} s</span></p>
     <p>Steps: <span>{{steps}}</span></p>

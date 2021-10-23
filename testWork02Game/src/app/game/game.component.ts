@@ -1,5 +1,6 @@
-import { Component, OnDestroy  } from '@angular/core';
 import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit  } from '@angular/core';
+
 import { rotateCard } from '../shared/animations';
 import { GameTypeService } from '../shared/game-type.service';
 import { User } from '../shared/interfaces';
@@ -10,8 +11,8 @@ import { RecordsService } from '../shared/records.service';
   styleUrls: ['./game.component.scss'],
   animations: rotateCard,
 })
-export class GameComponent implements OnDestroy  {
-  cardsState :Array<string> = []
+export class GameComponent implements OnInit, OnDestroy  {
+  cardsState: Array<string> = [];
   elements: Array<string> = [];
   userData!:User
   timer!:ReturnType<typeof setTimeout>
@@ -22,45 +23,25 @@ export class GameComponent implements OnDestroy  {
     private gameType: GameTypeService,
     private router: Router,
     private recordsService: RecordsService
+  ) {}
 
-  ) {
-    // this.elements = [
-    //   'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg',
-    //   'https://images.unsplash.com/photo-1589984662646-e7b2e4962f18?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjI1fHxmcnVpdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-    //   'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=415&q=80',
-    //   'https://images.unsplash.com/photo-1552914953-938eef0ce926?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZydWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-    //   'https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fGZydWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-    //   'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg',
-    //   'https://images.unsplash.com/photo-1589984662646-e7b2e4962f18?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjI1fHxmcnVpdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-    //   'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=415&q=80',
-    //   'https://images.unsplash.com/photo-1552914953-938eef0ce926?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZydWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-    //   'https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fGZydWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-    //   // 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg',
-    //   // 'https://images.unsplash.com/photo-1589984662646-e7b2e4962f18?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjI1fHxmcnVpdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-    //   // 'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=415&q=80',
-    //   // 'https://images.unsplash.com/photo-1552914953-938eef0ce926?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZydWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-    //   // 'https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fGZydWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-    //   // 'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg',
-    //   // 'https://images.unsplash.com/photo-1589984662646-e7b2e4962f18?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjI1fHxmcnVpdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-    //   // 'https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=415&q=80',
-    //   // 'https://images.unsplash.com/photo-1552914953-938eef0ce926?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZydWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-    //   // 'https://images.unsplash.com/photo-1587132137056-bfbf0166836e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fGZydWl0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-    // ]
-    // this.userData = {
-    //   nickname: 'AWRAWRAWRAWRAW', numberOfCard: '10', cardType: 'Fruits'
-    // }
-    // !Debug
+  ngOnInit(): void {
     this.elements = this.gameType.getCards();
     this.userData = this.gameType.getUser();
+    if (!this.userData) {
+      this.router.navigate(['/']);
+      return;
+    }
     this.cardsState.length = this.elements.length;
     this.cardsState.fill('start', 0, this.elements.length);
-    this.gameStart()
+    this.gameStart();
+
   }
 
-  changeState(idx:number) {
+  changeState(idx:number): void {
     let rotatedCards = this.cardsState.filter((card) => card === 'rotate').length;
     if (this.cardsState[idx] === 'rotate' || this.cardsState[idx] === 'invalid' || rotatedCards > 1)  {
-       return
+      return;
     }
     if (rotatedCards < 2 ) {
       this.cardsState[idx] = 'rotate';
@@ -68,43 +49,43 @@ export class GameComponent implements OnDestroy  {
      }
 
     if (rotatedCards > 1) {
-      this.steps++
+      this.steps++;
       setTimeout(() => {
-        this.guessedCards()
-        this.cardsState = this.cardsState.map((card) => card === 'rotate'? card = 'start':card)
+        this.guessedCards();
+        this.cardsState = this.cardsState.map((card) => card === 'rotate' ? card = 'start' : card);
         if (this.winCheck()) {
-          this.gameType.addDataToUser(this.steps, this.time)
+          this.gameType.addDataToUser(this.steps, this.time);
 
           this.recordsService.setRecord(this.gameType.getUser()).subscribe(() => {
-             this.router.navigate(['/win'])
+            this.router.navigate(['/win']);
           })
         }
-      },1000)
+      }, 1000);
     }
   }
 
-  gameStart() {
+  gameStart(): void {
     this.timer = setInterval(() => {
-        this.time++
-    },1000)
+      this.time++;
+    }, 1000);
   }
 
-  winCheck() {
+  winCheck(): boolean {
     const test = this.cardsState.map((card:any) => card === 'invalid');
-    return test.every((val:boolean) => val === true)
+    return test.every((val: boolean) => val === true);
   }
 
-   guessedCards() {
+   guessedCards(): void {
     const firstIdx = this.cardsState.indexOf('rotate');
     const lastIdx = this.cardsState.lastIndexOf('rotate');
 
     if (this.elements[firstIdx] === this.elements[lastIdx]) {
-      this.cardsState = this.cardsState.map((card) => card === 'rotate'? card = 'invalid':card)
+      this.cardsState = this.cardsState.map((card) => card === 'rotate' ? card = 'invalid' : card);
     }
   }
 
-  ngOnDestroy() {
-    clearInterval(this.timer)
+  ngOnDestroy(): void {
+    clearInterval(this.timer);
   }
 }
 

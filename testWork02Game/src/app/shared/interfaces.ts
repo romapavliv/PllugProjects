@@ -1,6 +1,6 @@
 export interface User {
   nickname: string,
-  numberOfCard: string | number,
+  numberOfCard: number,
   cardType: string,
   steps?: number,
   time?: number,
