@@ -26,16 +26,22 @@ export class WinComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.winUser  = {
-      cardType: "Fruits",
-      nickname: "Taras",
-      numberOfCard: "20",
-      steps: 9,
-      time: 22
-    }
+    // this.winUser  = {
+    //   cardType: "Fruits",
+    //   nickname: "AWRAWRAWRAWRAW",
+    //   numberOfCard: "10",
+    //   steps: 9,
+    //   time: 22
+    // }
     //!Debug
 
-    //this.winUser = this.gameType.getUser();
+    this.winUser = this.gameType.getUser();
+    if (!this.winUser) {
+      this.router.navigate(['/']);
+      return
+    }
+
+    this.buttonsActive = this.winUser.numberOfCard === 20 ? false : true;
     this.recordsService.getRecord().subscribe((allResults) => {
       this.resultsFor10Cards = this.sortData(allResults, 10)
       this.resultsFor20Cards = this.sortData(allResults, 20)
@@ -43,10 +49,6 @@ export class WinComponent implements OnInit {
     }, (err) => {
 
     })
-
-    if (!this.winUser) {
-      this.router.navigate(['/'])
-    }
   }
 
   changeRecordsData(numberOfCard: number) {
@@ -58,6 +60,19 @@ export class WinComponent implements OnInit {
     return results.filter((result) => +result.numberOfCard === numberOfCard)
       .sort((a: User, b: User) => a.time! - b.time!)
       .slice(0, 10);
+  }
+
+  outsideClick(event:Event|any) {
+    let target = event.target;
+
+    while (!target.classList.contains('win-content')) {
+      if (target.classList.contains('all-results') || target.classList.contains('cup-btn') ) {
+        return
+      }
+      target = target.offsetParent;
+      if (!target) break;
+    }
+    this.recordsState = this.recordsState === 'show'? 'hide': 'hide'
   }
 
 }

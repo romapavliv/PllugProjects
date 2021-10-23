@@ -172,7 +172,7 @@
 
   .all-results {
     width: 400px;
-    height: 400px;
+    height: 420px;
     background-color: var(--black-color);
     color: var(--white-color);
     position: absolute;
@@ -227,6 +227,7 @@
       }
 
       td {
+        white-space: nowrap;
         text-align: start;
       }
 
@@ -236,7 +237,10 @@
       }
 
       .nick {
-        width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 160px;
+        display: inline-block;
       }
 
       .time {
@@ -371,19 +375,25 @@
 
     .all-results {
       width: 310px;
+      height: 400px;
 
       &>p {
         font-size: 22px;
       }
 
       &>table {
+        font-size: 18px;
+
         th {
           text-align: start;
-          color: var(--dark-gray-color);
         }
 
         td {
           text-align: start;
+        }
+
+        .nick {
+          width: 130px;
         }
 
         .place,

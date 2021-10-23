@@ -1,4 +1,4 @@
-<div class="win-content">
+<div class="win-content" (click)="outsideClick($event)">
   <div class="congratulations" *ngIf="winUser">
     <h2>Congratulations <span>{{winUser.nickname}}</span>, you are winner</h2>
     <button class="cup-btn" type="button" (click)="recordsState = recordsState === 'hide'? 'show': 'hide'">

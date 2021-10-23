@@ -1,3 +1,4 @@
+import { Target } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -85,10 +86,28 @@ export class StartComponent implements OnInit {
     this.buttonsActive = numberOfCard === 10 ? true : false
     numberOfCard === 10 ? this.currentResults = this.resultsFor10Cards : this.currentResults = this.resultsFor20Cards
   }
+
   sortData(results:Array<User> ,numberOfCard:number) {
     return results.filter((result) => +result.numberOfCard === numberOfCard)
       .sort((a: User, b: User) => a.time! - b.time!)
       .slice(0, 10);
   }
 
+  outsideClick(event:Event|any) {
+    let target = event.target;
+
+    while (!target.classList.contains('start-content')) {
+      if (target.classList.contains('all-results') || target.classList.contains('cup-btn') ) {
+        return
+      }
+      target = target.offsetParent;
+      if (!target) break;
+    }
+    this.recordsState = this.recordsState === 'show'? 'hide': 'hide'
+  }
+  nicknameInputFilter() {
+    let inputValue: string = this.form.get('nickname')?.value
+    inputValue = inputValue.replace(/[^A-Za-z]/gi, "");
+    this.form.get('nickname')?.setValue(inputValue);
+  }
 }

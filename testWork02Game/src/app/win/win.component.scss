@@ -26,6 +26,7 @@
     &>h2 {
       font-size: 24px;
       text-align: center;
+
       &>span {
         color: var(--orange-color);
       }
@@ -51,7 +52,7 @@
 
   .all-results {
     width: 400px;
-    height: 400px;
+    height: 420px;
     background-color: var(--black-color);
     color: var(--white-color);
     position: absolute;
@@ -60,6 +61,7 @@
     border-bottom-left-radius: 30px;
     padding: 1rem;
     box-shadow: 0px 1px 0px rgb(54, 54, 54), 0px 2px 0px #363636, 0px 3px 0px rgb(53, 53, 53), 0px 4px 0px #292929, 0px 5px 0px rgb(37, 37, 37), 0px 6px 1px rgba(0, 0, 0, 0.1), 0px 0px 5px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 3px 5px rgba(0, 0, 0, 0.2), -4px 8px 8px rgba(0, 0, 0, 0.1), -8px 16px 16px rgba(0, 0, 0, 0.37), -16px 32px 32px rgba(0, 0, 0, 0.25), -32px 64px 64px rgba(0, 0, 0, 0.25);
+    transform: translateY(-115%);
 
     &>p {
       text-align: center;
@@ -106,6 +108,7 @@
 
       td {
         text-align: start;
+        white-space: nowrap;
       }
 
       .place,
@@ -114,7 +117,10 @@
       }
 
       .nick {
-        width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 160px;
+        display: inline-block;
       }
 
       .time {
@@ -199,19 +205,25 @@
 
     .all-results {
       width: 310px;
+      height: 400px;
 
       &>p {
         font-size: 22px;
       }
 
       &>table {
+        font-size: 18px;
+
         th {
           text-align: start;
-          color: var(--dark-gray-color);
         }
 
         td {
           text-align: start;
+        }
+
+        .nick {
+          width: 130px;
         }
 
         .place,
@@ -234,4 +246,3 @@
     }
   }
 }
-
