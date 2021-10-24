@@ -106,7 +106,7 @@ export class StartComponent {
   }
   nicknameInputFilter(): void {
     let inputValue: string = this.form.get('nickname')?.value;
-    inputValue = inputValue.replace(/[^A-Za-z0-9]/gi, '');
+    inputValue = inputValue.replace(/[^A-Za-z0-9А-Яа-я]/gi, '');
     this.form.get('nickname')?.setValue(inputValue);
   }
 }
