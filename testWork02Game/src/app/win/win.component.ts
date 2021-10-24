@@ -13,12 +13,12 @@ import { RecordsService } from '../shared/records.service';
   animations: [hideRecords],
 })
 export class WinComponent implements OnInit {
-  currentResults:Array<User> =[]
-  resultsFor10Cards:Array<User> =[]
-  resultsFor20Cards:Array<User> =[]
+  currentResults: Array<User> = [];
+  resultsFor10Cards: Array<User> = [];
+  resultsFor20Cards: Array<User> = [];
   buttonsActive = true;
-  winUser!: User
-  recordsState = 'hide'
+  winUser!: User;
+  recordsState = 'hide';
 
   constructor(
     private gameType: GameTypeService,
@@ -33,34 +33,41 @@ export class WinComponent implements OnInit {
       return;
     }
 
-    this.recordsService.getRecord().subscribe((allResults) => {
+    this.recordsService.getRecord().subscribe((allResults: Array<User>) => {
       this.resultsFor10Cards = this.sortData(allResults, 10);
       this.resultsFor20Cards = this.sortData(allResults, 20);
       this.changeRecordsData(+this.winUser.numberOfCard);
-    })
+    });
 
   }
 
-  changeRecordsData(numberOfCard: number):void {
+  changeRecordsData(numberOfCard: number): void {
     this.buttonsActive = numberOfCard === 10 ? true : false;
     numberOfCard === 10 ? this.currentResults = this.resultsFor10Cards : this.currentResults = this.resultsFor20Cards;
   }
 
-  sortData(results:Array<User> ,numberOfCard:number): Array<User> {
+  sortData(results: Array<User>, numberOfCard: number): Array<User> {
     return results.filter((result) => +result.numberOfCard === numberOfCard)
-      .sort((a: User, b: User) => a.time! - b.time!)
+      .sort((a: User, b: User) => {
+        if (a.time && b.time) {
+          return a.time - b.time;
+        }
+        return 0;
+      })
       .slice(0, 10);
   }
 
-  outsideClick(event:Event|any): void {
+  outsideClick(event: Event | any): void {
     let target = event.target;
 
     while (!target.classList.contains('win-content')) {
-      if (target.classList.contains('all-results') || target.classList.contains('cup-btn') ) {
+      if (target.classList.contains('all-results') || target.classList.contains('cup-btn')) {
         return;
       }
       target = target.offsetParent;
-      if (!target) break;
+      if (!target) {
+        break;
+      }
     }
     this.recordsState = this.recordsState === 'show' ? 'hide' : 'hide';
   }

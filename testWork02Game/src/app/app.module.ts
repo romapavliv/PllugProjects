@@ -1,4 +1,4 @@
-import {  NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { WinComponent } from './win/win.component';
 import { GameComponent } from './game/game.component';
 import { StartComponent } from './start/start.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {
@@ -16,7 +18,7 @@ const routes: Routes = [
       { path: '', component: StartComponent },
       { path: 'game', component: GameComponent },
       { path: 'win', component: WinComponent },
-      { path:'**', redirectTo:'/' },
+      { path: '**', redirectTo: '/' },
     ]
   }
 ];
@@ -27,13 +29,19 @@ const routes: Routes = [
     StartComponent,
     GameComponent,
     WinComponent,
-   ],
+  ],
   imports: [
-    BrowserAnimationsModule ,
+    BrowserAnimationsModule,
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    [RouterModule.forRoot(routes)],
+    RouterModule.forRoot(routes),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

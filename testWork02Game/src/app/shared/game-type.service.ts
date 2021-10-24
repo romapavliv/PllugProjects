@@ -46,22 +46,22 @@ export class GameTypeService {
       '/assets/img/cars/9.jpg',
       '/assets/img/cars/10.jpg',
     ],
-  }
+  };
 
-  constructor(private router:Router) { }
+  constructor(private router: Router) { }
 
   setUserData(user: User): void {
     this.userData = user;
   }
 
   getCards(): Array<string> {
-     if (this.userData) {
-       const cardType = this.cards[this.userData.cardType]
-         .sort(() => Math.random() - 0.5)
-         .slice(0, +this.userData.numberOfCard / 2);
+    if (this.userData) {
+      const cardType = this.cards[this.userData.cardType]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, +this.userData.numberOfCard / 2);
       return [...cardType, ...cardType].sort(() => Math.random() - 0.5);
     }
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
     return [];
   }
 
@@ -70,7 +70,7 @@ export class GameTypeService {
     this.userData.time = time;
   }
 
-  getUser() {
+  getUser(): User {
     return this.userData;
   }
 }

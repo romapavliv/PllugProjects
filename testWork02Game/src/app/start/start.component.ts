@@ -36,22 +36,22 @@ export class StartComponent {
     this.form = new FormGroup({
       nickname: new FormControl(null, [Validators.required, Validators.minLength(2)]),
       numberOfCard: new FormControl(20)
-    })
-    this.recordsService.getRecord().subscribe((allResults) => {
+    });
+    this.recordsService.getRecord().subscribe((allResults: Array<User>) => {
       this.resultsFor10Cards = this.sortData(allResults, 10);
       this.resultsFor20Cards = this.sortData(allResults, 20);
       this.currentResults = this.resultsFor10Cards;
-    })
+    });
   }
 
-  refreshNickname():void {
+  refreshNickname(): void {
     this.rotateBtnState = this.rotateBtnState === 'end' ? 'start' : 'end';
     this.form.get('nickname')?.reset();
   }
 
-  isAllSelected(event: Event|any, item: any) {
+  isAllSelected(event: Event | any, item: any): void {
     this.checklist.forEach(val => {
-      if (val.id == item.id) {
+      if (val.id === item.id) {
         val.isSelected = !val.isSelected;
       } else {
         val.isSelected = false;
@@ -67,9 +67,9 @@ export class StartComponent {
 
     const user: User = {
       nickname: this.form.get('nickname')?.value,
-      numberOfCard:this.form.get('numberOfCard')?.value,
+      numberOfCard: this.form.get('numberOfCard')?.value,
       cardType: this.checklist.filter((el) => el.isSelected === true).shift().value,
-    }
+    };
     this.gameType.setUserData(user);
     this.router.navigate(['/game']);
   }
@@ -79,21 +79,28 @@ export class StartComponent {
     numberOfCard === 10 ? this.currentResults = this.resultsFor10Cards : this.currentResults = this.resultsFor20Cards;
   }
 
-  sortData(results:Array<User> ,numberOfCard:number): Array<User> {
+  sortData(results: Array<User>, numberOfCard: number): Array<User> {
     return results.filter((result) => +result.numberOfCard === numberOfCard)
-      .sort((a: User, b: User) => a.time! - b.time!)
+      .sort((a: User, b: User) => {
+        if (a.time && b.time) {
+          return a.time - b.time;
+        }
+        return 0;
+      })
       .slice(0, 10);
   }
 
-  outsideClick(event:Event|any): void {
+  outsideClick(event: Event | any): void {
     let target = event.target;
 
     while (!target.classList.contains('start-content')) {
-      if (target.classList.contains('all-results') || target.classList.contains('cup-btn') ) {
+      if (target.classList.contains('all-results') || target.classList.contains('cup-btn')) {
         return;
       }
       target = target.offsetParent;
-      if (!target) break;
+      if (!target) {
+        break;
+      }
     }
     this.recordsState = this.recordsState === 'show' ? 'hide' : 'hide';
   }

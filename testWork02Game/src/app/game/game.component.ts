@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Component, OnDestroy, OnInit  } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { rotateCard } from '../shared/animations';
 import { GameTypeService } from '../shared/game-type.service';
@@ -11,11 +11,11 @@ import { RecordsService } from '../shared/records.service';
   styleUrls: ['./game.component.scss'],
   animations: rotateCard,
 })
-export class GameComponent implements OnInit, OnDestroy  {
+export class GameComponent implements OnInit, OnDestroy {
   cardsState: Array<string> = [];
   elements: Array<string> = [];
-  userData!:User
-  timer!:ReturnType<typeof setTimeout>
+  userData!: User;
+  timer!: ReturnType<typeof setTimeout>;
   steps: number = 0;
   time: number = 0;
 
@@ -23,7 +23,7 @@ export class GameComponent implements OnInit, OnDestroy  {
     private gameType: GameTypeService,
     private router: Router,
     private recordsService: RecordsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.elements = this.gameType.getCards();
@@ -38,15 +38,15 @@ export class GameComponent implements OnInit, OnDestroy  {
 
   }
 
-  changeState(idx:number): void {
+  changeState(idx: number): void {
     let rotatedCards = this.cardsState.filter((card) => card === 'rotate').length;
-    if (this.cardsState[idx] === 'rotate' || this.cardsState[idx] === 'invalid' || rotatedCards > 1)  {
+    if (this.cardsState[idx] === 'rotate' || this.cardsState[idx] === 'invalid' || rotatedCards > 1) {
       return;
     }
-    if (rotatedCards < 2 ) {
+    if (rotatedCards < 2) {
       this.cardsState[idx] = 'rotate';
       rotatedCards++;
-     }
+    }
 
     if (rotatedCards > 1) {
       this.steps++;
@@ -58,7 +58,7 @@ export class GameComponent implements OnInit, OnDestroy  {
 
           this.recordsService.setRecord(this.gameType.getUser()).subscribe(() => {
             this.router.navigate(['/win']);
-          })
+          });
         }
       }, 1000);
     }
@@ -71,11 +71,11 @@ export class GameComponent implements OnInit, OnDestroy  {
   }
 
   winCheck(): boolean {
-    const test = this.cardsState.map((card:any) => card === 'invalid');
+    const test = this.cardsState.map((card: any) => card === 'invalid');
     return test.every((val: boolean) => val === true);
   }
 
-   guessedCards(): void {
+  guessedCards(): void {
     const firstIdx = this.cardsState.indexOf('rotate');
     const lastIdx = this.cardsState.lastIndexOf('rotate');
 
