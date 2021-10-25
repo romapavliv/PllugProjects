@@ -4,4 +4,5 @@ export interface User {
   cardType: string;
   steps?: number;
   time?: number;
+  date?: Date;
 }

@@ -54,7 +54,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.guessedCards();
         this.cardsState = this.cardsState.map((card) => card === 'rotate' ? card = 'start' : card);
         if (this.winCheck()) {
-          this.gameType.addDataToUser(this.steps, this.time);
+          this.gameType.addDataToUser(this.steps, this.time, new Date);
 
           this.recordsService.setRecord(this.gameType.getUser()).subscribe(() => {
             this.router.navigate(['/win']);

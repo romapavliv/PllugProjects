@@ -65,9 +65,10 @@ export class GameTypeService {
     return [];
   }
 
-  addDataToUser(steps: number, time: any): void {
+  addDataToUser(steps: number, time: number, date: Date): void {
     this.userData.steps = steps;
     this.userData.time = time;
+    this.userData.date = date;
   }
 
   getUser(): User {
