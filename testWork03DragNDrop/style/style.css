@@ -1,0 +1,113 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.drag-n-drop-container {
+  width: 800px;
+  height: 300px;
+  border: 2px solid black;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.drag-n-drop-container__form .error {
+  color: #ff3838;
+  display: none;
+}
+
+.drag-n-drop-container__area {
+  color: #6b6b6b;
+  width: 500px;
+  height: 200px;
+  border: 4px solid #878787;
+  -webkit-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.drag-n-drop-container__area > p {
+  font-size: 30px;
+  font-weight: 900;
+  pointer-events: none;
+}
+
+.area-drag-enter {
+  border: 4px dashed #888888;
+}
+
+.preview-container {
+  width: 600px;
+  height: 850px;
+  margin: 0 auto;
+  border: 2px solid red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.preview-container > .thumbnail {
+  position: relative;
+  height: 150px;
+  margin: .5rem;
+}
+
+.preview-container > .thumbnail img {
+  width: 100%;
+  height: 100%;
+}
+
+.preview-container > .thumbnail > .remove-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 25px;
+  height: 25px;
+  background: url("/style/img/remove.png") 0 0/contain;
+  border: none;
+  opacity: 0;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+.preview-container > .thumbnail > .remove-btn:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.drag-n-drop-container {
+  width: 800px;
+  height: 300px;
+  border: 2px solid black;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  &__form {
+    .error{
+      color: rgb(255, 56, 56);
+      display: none;  
+    }
+  }
+
+  &__area {
+    color: #6b6b6b;
+    width: 500px;
+    height: 200px;
+    border: 4px solid hsl(0, 0%, 53%);
+    transition: .5s ease-in-out;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &>p {
+      font-size: 30px;
+      font-weight: 900;
+      pointer-events: none;
+    }
+  }
+
+}
+
+.area-drag-enter {
+  border: 4px dashed #888888;
+}
+
+.preview-container {
+  width: 600px;
+  height: 850px;
+  margin: 0 auto;
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &>.thumbnail {
+    position: relative;
+    height: 150px;
+    margin: .5rem;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+
+    &>.remove-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 25px;
+      height: 25px;
+      background: url('/style/img/remove.png') 0 0/contain;
+      border: none;
+      opacity: 0;
+      transition: .3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+
+}
