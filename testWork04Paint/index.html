@@ -12,9 +12,25 @@
 <body>
   <div class="content">
     <h1>Canvas Paint</h1>
-    <div class="instuments"></div>
+    <div class="instruments">
+      <input id="lineWidth" type="range" min="1" max="25" step="1" value="1">
+      <input id="lineColor" type="color" name="head" value="#000000">
+      <button id="clean-canvas">Clean Canvas</button>
+      <div id="colors" class="colors">
+        <div style="background-color: #000000;" class="color"></div>
+        <div style="background-color: #ffffff;" class="color"></div>
+        <div style="background-color: #c92327;" class="color"></div>
+        <div style="background-color: #e65e2e;" class="color"></div>
+        <div style="background-color: #90a13b;" class="color"></div>
+        <div style="background-color: #fddf41;" class="color"></div>
+        <div style="background-color: #335594;" class="color"></div>
+        <div style="background-color: #52c0b5;" class="color"></div>
+        <div style="background-color: #cb1c69;" class="color"></div>
+        <div style="background-color: #231f20;" class="color"></div>
+      </div>
+    </div>
     <canvas id="canvas" class="canvas">
-      У вас застарілий браузер
+
     </canvas>
   </div>
 
