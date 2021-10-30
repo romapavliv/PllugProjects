@@ -42,16 +42,15 @@ function previewFiles(file) {
   fileContainer.appendChild(img);
 
   img.src = fileExtension(file.name, "txt")
-    ? "/style/img/txt.png"
+    ? "style/img/txt.png"
     : fileExtension(file.name, "csv")
-    ? "/style/img/csv.png"
+    ? "style/img/csv.png"
     : URL.createObjectURL(file);
 
   fileContainer.classList.add("thumbnail");
   previewContainer.appendChild(fileContainer);
   addDragNDropEvents(fileContainer);
   addRemoveButton(fileContainer);
-  showRemoveButtonEvent(fileContainer);
 }
 
 function fileExtension(fileName, extension) {
@@ -90,15 +89,6 @@ function addRemoveButton(newElement) {
   });
 }
 
-function showRemoveButtonEvent(newElement) {
-  newElement.addEventListener("mouseenter", (event) => {
-    event.target.lastChild.style.opacity = 1;
-  });
-  newElement.addEventListener("mouseleave", (event) => {
-    event.target.lastChild.style.opacity = 0;
-  });
-}
-
 fileEl.addEventListener("change", ({ target: { files } }) => {
   filesFilter([...files]).forEach(previewFiles);
 });
@@ -111,9 +101,9 @@ function filesFilter(files) {
   );
   if (files.length !== lengthBeforeFilter) {
     clearTimeout(showErrTimeout);
-    error.style.display = "block";
+    error.firstElementChild.style.display = "block";
     showErrTimeout = setTimeout(() => {
-      error.style.display = "none";
+      error.firstElementChild.style.display = "none";
     }, 2500);
   }
   return files;
