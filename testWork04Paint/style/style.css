@@ -45,50 +45,14 @@
   background: red;
 }
 
-.instruments .colors :nth-child(1) {
-  background-color: #000000;
-}
-
-.instruments .colors :nth-child(2) {
-  background-color: #ffffff;
-}
-
-.instruments .colors :nth-child(3) {
-  background-color: #c92327;
-}
-
-.instruments .colors :nth-child(4) {
-  background-color: #e65e2e;
-}
-
-.instruments .colors :nth-child(5) {
-  background-color: #90a13b;
-}
-
-.instruments .colors :nth-child(6) {
-  background-color: #fddf41;
-}
-
-.instruments .colors :nth-child(7) {
-  background-color: #335594;
-}
-
-.instruments .colors :nth-child(8) {
-  background-color: #52c0b5;
-}
-
-.instruments .colors :nth-child(9) {
-  background-color: #cb1c69;
-}
-
-.instruments .colors :nth-child(10) {
-  background-color: #231f20;
-}
-
 .canvas {
   width: 750px;
   height: 500px;
   border: 1px solid red;
   display: block;
+}
+
+.eraser-cursor {
+  cursor: url("img/ico/eracer.png"), auto;
 }
 /*# sourceMappingURL=style.css.map */
