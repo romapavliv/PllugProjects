@@ -11,13 +11,14 @@ const mainBtnColor = document.querySelector("#main-bnt-color");
 const contextMenuBtnColor = document.querySelector("#context-menu-bnt-color");
 const cleanCanvasBtn = document.querySelector("#clean-canvas");
 
-const eraser = document.querySelector("#eraser");
 const pencil = document.querySelector("#pencil");
+const eraser = document.querySelector("#eraser");
 const line = document.querySelector("#line");
 const circle = document.querySelector("#circle");
 const rectangle = document.querySelector("#rectangle");
 const rightTriangle = document.querySelector("#right-triangle");
 const star = document.querySelector("#star");
+const cloudlet = document.querySelector("#cloudlet");
 
 let saveImgData;
 let isMouseDown = false;
@@ -40,6 +41,7 @@ const properties = {
     rectangle: false,
     rightTriangle: false,
     star: false,
+    cloudlet: false,
   },
 };
 
@@ -88,8 +90,12 @@ canvas.addEventListener("mousemove", (event) => {
     rightTriangleDrawing(event.offsetX, event.offsetY);
   }
   if (properties.instrumentType.star) {
-    //restoreCanvas();
+    restoreCanvas();
     starDrawing(event.offsetX, event.offsetY);
+  }
+  if (properties.instrumentType.cloudlet) {
+    restoreCanvas();
+    cloudletDrawing(event.offsetX, event.offsetY);
   }
 });
 
@@ -155,8 +161,13 @@ rectangle.addEventListener("click", () => {
 rightTriangle.addEventListener("click", () => {
   changeCurrentInstrument("rightTriangle");
 });
+
 star.addEventListener("click", () => {
   changeCurrentInstrument("star");
+});
+
+cloudlet.addEventListener("click", () => {
+  changeCurrentInstrument("cloudlet");
 });
 
 // other functions
@@ -260,6 +271,39 @@ function rightTriangleDrawing(x, y) {
   context.closePath();
   context.stroke();
 }
-function starDrawing(x, y) {
-  console.log("hello");
+
+function starDrawing(mouseX, mouseY) {
+  context.lineWidth = properties.width;
+  context.strokeStyle = properties.currentColor;
+
+  const spikes = 5;
+  const outerRadius = startCoords.x - mouseX;
+  const innerRadius = (startCoords.x - mouseX) / 2;
+
+  let x = startCoords.x;
+  let y = startCoords.y;
+
+  let rot = (Math.PI / 2) * 3;
+  let step = Math.PI / spikes;
+
+  context.beginPath();
+  context.moveTo(startCoords.x, startCoords.y - outerRadius);
+  for (i = 0; i < spikes; i++) {
+    x = startCoords.x + Math.cos(rot) * outerRadius;
+    y = startCoords.y + Math.sin(rot) * outerRadius;
+    context.lineTo(x, y);
+    rot += step;
+
+    x = startCoords.x + Math.cos(rot) * innerRadius;
+    y = startCoords.y + Math.sin(rot) * innerRadius;
+    context.lineTo(x, y);
+    rot += step;
+  }
+  context.lineTo(startCoords.x, startCoords.y - outerRadius);
+  context.closePath();
+  context.stroke();
+}
+
+function cloudletDrawing(x, y) {
+  console.log("test");
 }
