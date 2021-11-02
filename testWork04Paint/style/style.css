@@ -14,12 +14,14 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  cursor: crosshair;
 }
 
 .instruments {
   width: 750px;
   height: 100px;
   border: 1px solid green;
+  padding: 0.5rem;
 }
 
 .instruments .colors {
@@ -46,8 +48,6 @@
 }
 
 .canvas {
-  width: 750px;
-  height: 500px;
   border: 1px solid red;
   display: block;
 }

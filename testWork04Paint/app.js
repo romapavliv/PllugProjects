@@ -4,12 +4,31 @@ const context = canvas.getContext("2d");
 canvas.width = 750;
 canvas.height = 500;
 
+context.fillStyle = "#ffffff";
+context.fillRect(0, 0, canvas.width, canvas.height);
+
+window.addEventListener("resize", (event) => {
+  if (event.target.outerWidth < 767) {
+    canvas.width = 320;
+    canvas.height = 500;
+  } else {
+    canvas.width = 750;
+    canvas.height = 500;
+  }
+});
+
+// setInterval(() => {
+//   console.log(mql);
+// }, 1000);
+
 const colorPanel = document.querySelector("#colors");
 
 const lineWidth = document.querySelector("#lineWidth");
 const mainBtnColor = document.querySelector("#main-bnt-color");
 const contextMenuBtnColor = document.querySelector("#context-menu-bnt-color");
 const cleanCanvasBtn = document.querySelector("#clean-canvas");
+const saveCanvasBtn = document.querySelector("#save-canvas");
+const fillCheckbox = document.querySelector("#fill-checkbox");
 
 const pencil = document.querySelector("#pencil");
 const eraser = document.querySelector("#eraser");
@@ -33,6 +52,7 @@ const properties = {
   mainBtnColor: "#000000",
   contextBtnColor: "#ffffff",
   currentColor: "#000000",
+  fillElement: false,
   instrumentType: {
     pencil: true,
     eraser: false,
@@ -49,6 +69,7 @@ const properties = {
 canvas.addEventListener("mousedown", (event) => {
   startCoords.x = event.offsetX;
   startCoords.y = event.offsetY;
+
   saveCanvas();
   if (!properties.eraser) {
     properties.currentColor =
@@ -66,40 +87,35 @@ canvas.addEventListener("mousemove", (event) => {
   if (!isMouseDown) {
     return;
   }
+  const [x, y] = [event.offsetX, event.offsetY];
 
   if (properties.instrumentType.pencil) {
-    pencilDrawing(event.offsetX, event.offsetY);
-  }
-  if (properties.instrumentType.eraser) {
-    eraserDrawing(event.offsetX, event.offsetY);
-  }
-  if (properties.instrumentType.line) {
+    pencilDrawing(x, y);
+  } else if (properties.instrumentType.eraser) {
+    eraserDrawing(x, y);
+  } else if (properties.instrumentType.line) {
     restoreCanvas();
-    lineDrawing(event.offsetX, event.offsetY);
-  }
-  if (properties.instrumentType.circle) {
+    lineDrawing(x, y);
+  } else if (properties.instrumentType.circle) {
     restoreCanvas();
-    circleDrawing(event.offsetX, event.offsetY);
-  }
-  if (properties.instrumentType.rectangle) {
+    circleDrawing(x, y);
+  } else if (properties.instrumentType.rectangle) {
     restoreCanvas();
-    rectangleDrawing(event.offsetX, event.offsetY);
-  }
-  if (properties.instrumentType.rightTriangle) {
+    rectangleDrawing(x, y);
+  } else if (properties.instrumentType.rightTriangle) {
     restoreCanvas();
-    rightTriangleDrawing(event.offsetX, event.offsetY);
-  }
-  if (properties.instrumentType.star) {
+    rightTriangleDrawing(x, y);
+  } else if (properties.instrumentType.star) {
     restoreCanvas();
-    starDrawing(event.offsetX, event.offsetY);
-  }
-  if (properties.instrumentType.cloudlet) {
+    starDrawing(x, y);
+  } else if (properties.instrumentType.cloudlet) {
     restoreCanvas();
-    cloudletDrawing(event.offsetX, event.offsetY);
+    cloudletDrawing(x, y);
   }
 });
 
 cleanCanvasBtn.addEventListener("click", clearCanvas);
+saveCanvasBtn.addEventListener("click", saveImgToDesktop, false);
 
 // properties listeners
 canvas.addEventListener("contextmenu", (event) => {
@@ -116,6 +132,10 @@ mainBtnColor.addEventListener("change", (event) => {
 
 contextMenuBtnColor.addEventListener("change", (event) => {
   properties.contextBtnColor = event.target.value;
+});
+
+fillCheckbox.addEventListener("click", (event) => {
+  properties.fillElement = properties.fillElement ? false : true;
 });
 
 // get color for mouse buttons
@@ -135,15 +155,13 @@ colorPanel.addEventListener("contextmenu", (event) => {
 });
 
 // tool selection
-eraser.addEventListener("click", () => {
-  changeCurrentInstrument("eraser");
-  //canvas.classList.add("eraser-cursor");
+pencil.addEventListener("click", () => {
+  changeCurrentInstrument("pencil");
 });
 
-pencil.addEventListener("click", () => {
-  properties.width = lineWidth.value;
-  changeCurrentInstrument("pencil");
-  //canvas.classList.remove("eraser-cursor");
+eraser.addEventListener("click", () => {
+  changeCurrentInstrument("eraser");
+  canvas.classList.add("eraser-cursor");
 });
 
 line.addEventListener("click", () => {
@@ -176,7 +194,7 @@ function rgbToHex(color) {
     const hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
   }
-  //!DEBUG
+
   color = color
     .replace(/[a-z()\s]/g, "")
     .split(",")
@@ -190,11 +208,12 @@ function changeCurrentInstrument(currentInstrument) {
     properties.instrumentType[key] = false;
   }
   properties.instrumentType[currentInstrument] = true;
-  console.log(properties.instrumentType);
+  canvas.classList.remove("eraser-cursor");
 }
 
 function clearCanvas() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "#ffffff";
+  context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function restoreCanvas() {
@@ -203,6 +222,11 @@ function restoreCanvas() {
 
 function saveCanvas() {
   saveImgData = context.getImageData(0, 0, canvas.width, canvas.height);
+}
+function saveImgToDesktop() {
+  this.href = canvas.toDataURL("png/*");
+
+  console.log("test");
 }
 
 // tools event
@@ -242,15 +266,16 @@ function circleDrawing(x, y) {
     Math.pow(x - startCoords.x, 2) + Math.pow(y - startCoords.y, 2)
   );
   context.lineWidth = properties.width;
-  context.strokeStyle = properties.currentColor;
+  context.strokeStyle = context.fillStyle = properties.currentColor;
   context.beginPath();
   context.arc(x, y, radius, 0, 2.0 * Math.PI);
   context.stroke();
+  if (properties.fillElement) context.fill();
 }
 
 function rectangleDrawing(x, y) {
   context.lineWidth = properties.width;
-  context.strokeStyle = properties.currentColor;
+  context.strokeStyle = context.fillStyle = properties.currentColor;
   context.beginPath();
   context.rect(
     startCoords.x,
@@ -259,22 +284,24 @@ function rectangleDrawing(x, y) {
     y - startCoords.y
   );
   context.stroke();
+  if (properties.fillElement) context.fill();
 }
 
 function rightTriangleDrawing(x, y) {
   context.lineWidth = properties.width;
-  context.strokeStyle = properties.currentColor;
+  context.strokeStyle = context.fillStyle = properties.currentColor;
   context.beginPath();
   context.moveTo(startCoords.x, startCoords.y);
   context.lineTo(startCoords.x, y);
   context.lineTo(x, y);
   context.closePath();
   context.stroke();
+  if (properties.fillElement) context.fill();
 }
 
 function starDrawing(mouseX, mouseY) {
   context.lineWidth = properties.width;
-  context.strokeStyle = properties.currentColor;
+  context.strokeStyle = context.fillStyle = properties.currentColor;
 
   const spikes = 5;
   const outerRadius = startCoords.x - mouseX;
@@ -302,8 +329,31 @@ function starDrawing(mouseX, mouseY) {
   context.lineTo(startCoords.x, startCoords.y - outerRadius);
   context.closePath();
   context.stroke();
+  if (properties.fillElement) context.fill();
 }
 
 function cloudletDrawing(x, y) {
-  console.log("test");
+  const cof = Math.sqrt(Math.pow(x - startCoords.x, 2)) / 50;
+  context.lineWidth = properties.width;
+  context.strokeStyle = context.fillStyle = properties.currentColor;
+
+  context.beginPath();
+  context.arc(startCoords.x, startCoords.y, 50 * cof, 2, 1.7 * Math.PI);
+  context.arc(
+    startCoords.x + 83 * cof,
+    startCoords.y - 30 * cof,
+    55 * cof,
+    3.4,
+    1.95 * Math.PI
+  );
+  context.arc(
+    startCoords.x + 185 * cof,
+    startCoords.y,
+    55 * cof,
+    3.75,
+    2.3 * Math.PI
+  );
+  context.closePath();
+  context.stroke();
+  if (properties.fillElement) context.fill();
 }
