@@ -7,22 +7,10 @@ canvas.height = 500;
 context.fillStyle = "#ffffff";
 context.fillRect(0, 0, canvas.width, canvas.height);
 
-window.addEventListener("resize", (event) => {
-  if (event.target.outerWidth < 767) {
-    canvas.width = 320;
-    canvas.height = 500;
-  } else {
-    canvas.width = 750;
-    canvas.height = 500;
-  }
-});
-
-// setInterval(() => {
-//   console.log(mql);
-// }, 1000);
-
 const colorPanel = document.querySelector("#colors");
+const tools = [...document.querySelectorAll(".tool")];
 
+// properties
 const lineWidth = document.querySelector("#lineWidth");
 const mainBtnColor = document.querySelector("#main-bnt-color");
 const contextMenuBtnColor = document.querySelector("#context-menu-bnt-color");
@@ -30,6 +18,7 @@ const cleanCanvasBtn = document.querySelector("#clean-canvas");
 const saveCanvasBtn = document.querySelector("#save-canvas");
 const fillCheckbox = document.querySelector("#fill-checkbox");
 
+// instruments
 const pencil = document.querySelector("#pencil");
 const eraser = document.querySelector("#eraser");
 const line = document.querySelector("#line");
@@ -64,6 +53,17 @@ const properties = {
     cloudlet: false,
   },
 };
+
+// adaptive canvas
+window.addEventListener("resize", (event) => {
+  if (event.target.outerWidth < 767) {
+    canvas.width = 320;
+    canvas.height = 500;
+  } else {
+    canvas.width = 750;
+    canvas.height = 500;
+  }
+});
 
 // mouse events listeners
 canvas.addEventListener("mousedown", (event) => {
@@ -115,9 +115,10 @@ canvas.addEventListener("mousemove", (event) => {
 });
 
 cleanCanvasBtn.addEventListener("click", clearCanvas);
+
 saveCanvasBtn.addEventListener("click", saveImgToDesktop, false);
 
-// properties listeners
+// listeners for properties
 canvas.addEventListener("contextmenu", (event) => {
   event.preventDefault();
 });
@@ -155,37 +156,37 @@ colorPanel.addEventListener("contextmenu", (event) => {
 });
 
 // tool selection
-pencil.addEventListener("click", () => {
-  changeCurrentInstrument("pencil");
+pencil.addEventListener("click", (event) => {
+  changeCurrentInstrument("pencil", event.target);
 });
 
-eraser.addEventListener("click", () => {
-  changeCurrentInstrument("eraser");
+eraser.addEventListener("click", (event) => {
+  changeCurrentInstrument("eraser", event.target);
   canvas.classList.add("eraser-cursor");
 });
 
-line.addEventListener("click", () => {
-  changeCurrentInstrument("line");
+line.addEventListener("click", (event) => {
+  changeCurrentInstrument("line", event.target);
 });
 
-circle.addEventListener("click", () => {
-  changeCurrentInstrument("circle");
+circle.addEventListener("click", (event) => {
+  changeCurrentInstrument("circle", event.target);
 });
 
-rectangle.addEventListener("click", () => {
-  changeCurrentInstrument("rectangle");
+rectangle.addEventListener("click", (event) => {
+  changeCurrentInstrument("rectangle", event.target);
 });
 
-rightTriangle.addEventListener("click", () => {
-  changeCurrentInstrument("rightTriangle");
+rightTriangle.addEventListener("click", (event) => {
+  changeCurrentInstrument("rightTriangle", event.target);
 });
 
-star.addEventListener("click", () => {
-  changeCurrentInstrument("star");
+star.addEventListener("click", (event) => {
+  changeCurrentInstrument("star", event.target);
 });
 
-cloudlet.addEventListener("click", () => {
-  changeCurrentInstrument("cloudlet");
+cloudlet.addEventListener("click", (event) => {
+  changeCurrentInstrument("cloudlet", event.target);
 });
 
 // other functions
@@ -203,12 +204,17 @@ function rgbToHex(color) {
   return `#${toHex(color[0])}${toHex(color[1])}${toHex(color[2])}`;
 }
 
-function changeCurrentInstrument(currentInstrument) {
+function changeCurrentInstrument(currentInstrument, target) {
   for (let key in properties.instrumentType) {
     properties.instrumentType[key] = false;
   }
   properties.instrumentType[currentInstrument] = true;
   canvas.classList.remove("eraser-cursor");
+
+  tools.forEach((tool) => {
+    tool.classList.remove("active");
+  });
+  target.classList.add("active");
 }
 
 function clearCanvas() {
@@ -216,17 +222,16 @@ function clearCanvas() {
   context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
+function saveCanvas() {
+  saveImgData = context.getImageData(0, 0, canvas.width, canvas.height);
+}
+
 function restoreCanvas() {
   context.putImageData(saveImgData, 0, 0);
 }
 
-function saveCanvas() {
-  saveImgData = context.getImageData(0, 0, canvas.width, canvas.height);
-}
 function saveImgToDesktop() {
   this.href = canvas.toDataURL("png/*");
-
-  console.log("test");
 }
 
 // tools event
@@ -253,7 +258,6 @@ function eraserDrawing(x, y) {
 
 function lineDrawing(x, y) {
   context.beginPath();
-
   context.lineWidth = properties.width;
   context.strokeStyle = properties.currentColor;
   context.moveTo(startCoords.x, startCoords.y);
