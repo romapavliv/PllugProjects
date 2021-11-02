@@ -37,7 +37,7 @@ const startCoords = {
 };
 
 const properties = {
-  width: 1,
+  width: 8,
   mainBtnColor: "#000000",
   contextBtnColor: "#ffffff",
   currentColor: "#000000",

@@ -143,10 +143,11 @@ a {
     }
   }
 
-  .width-range{
+  .width-range {
     max-width: 100px;
-    max-height:100px ;
-  } 
+    max-height: 100px;
+  }
+
   .tools {
     display: flex;
     flex-wrap: wrap;
@@ -177,35 +178,35 @@ a {
     }
 
     #pencil {
-      background: url('/style/img/ico/pencil.png') 0 0 / contain;
+      background: url('img/ico/pencil.png') 0 0 / contain no-repeat;
     }
 
     #eraser {
-      background: url('/style/img/ico/eracerIco.png') 0 0 / contain;
+      background: url('img/ico/eracerIco.png') 0 0 / contain no-repeat;
     }
 
     #line {
-      background: url('/style/img/ico/line.png') 0 0 / contain;
+      background: url('img/ico/line.png') 0 0 / contain no-repeat;
     }
 
     #circle {
-      background: url('/style/img/ico/circle.png') 0 0 / contain;
+      background: url('img/ico/circle.png') 0 0 / contain no-repeat;
     }
 
     #rectangle {
-      background: url('/style/img/ico/rectangle.png') 0 0 / contain;
+      background: url('img/ico/rectangle.png') 0 0 / contain no-repeat;
     }
 
     #right-triangle {
-      background: url('/style/img/ico/triangle.png') 0 0 / contain;
+      background: url('img/ico/triangle.png') 0 0 / contain no-repeat;
     }
 
     #star {
-      background: url('/style/img/ico/star.png') 0 0 / contain
+      background: url('img/ico/star.png') 0 0 / contain no-repeat;
     }
 
     #cloudlet {
-      background: url('/style/img/ico/cloud.png') 0 0 / contain;
+      background: url('img/ico/cloud.png') 0 0 / contain no-repeat;
     }
   }
 }

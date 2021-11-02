@@ -210,35 +210,35 @@ a {
 }
 
 .instruments .tools #pencil {
-  background: url("/style/img/ico/pencil.png") 0 0/contain;
+  background: url("img/ico/pencil.png") 0 0/contain no-repeat;
 }
 
 .instruments .tools #eraser {
-  background: url("/style/img/ico/eracerIco.png") 0 0/contain;
+  background: url("img/ico/eracerIco.png") 0 0/contain no-repeat;
 }
 
 .instruments .tools #line {
-  background: url("/style/img/ico/line.png") 0 0/contain;
+  background: url("img/ico/line.png") 0 0/contain no-repeat;
 }
 
 .instruments .tools #circle {
-  background: url("/style/img/ico/circle.png") 0 0/contain;
+  background: url("img/ico/circle.png") 0 0/contain no-repeat;
 }
 
 .instruments .tools #rectangle {
-  background: url("/style/img/ico/rectangle.png") 0 0/contain;
+  background: url("img/ico/rectangle.png") 0 0/contain no-repeat;
 }
 
 .instruments .tools #right-triangle {
-  background: url("/style/img/ico/triangle.png") 0 0/contain;
+  background: url("img/ico/triangle.png") 0 0/contain no-repeat;
 }
 
 .instruments .tools #star {
-  background: url("/style/img/ico/star.png") 0 0/contain;
+  background: url("img/ico/star.png") 0 0/contain no-repeat;
 }
 
 .instruments .tools #cloudlet {
-  background: url("/style/img/ico/cloud.png") 0 0/contain;
+  background: url("img/ico/cloud.png") 0 0/contain no-repeat;
 }
 
 .canvas {
