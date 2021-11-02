@@ -319,15 +319,6 @@ html {
   margin-right: auto;
 }
 
-.right-side__form .form__buttons #forgot-pass-btn, .right-side__text .form__buttons #forgot-pass-btn {
-  margin-left: auto;
-  text-align: end;
-  padding: 0 0;
-  position: absolute;
-  top: calc(130px + 50 * ((100vw - 320px) / 1920 -320));
-  right: 0;
-}
-
 .right-side__form .form__buttons .red-btn,
 .right-side__form .form__buttons .simple-btn, .right-side__text .form__buttons .red-btn,
 .right-side__text .form__buttons .simple-btn {
