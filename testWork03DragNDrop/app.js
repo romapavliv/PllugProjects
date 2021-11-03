@@ -108,3 +108,5 @@ function filesFilter(files) {
   }
   return files;
 }
+
+Завдання виконано
