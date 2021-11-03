@@ -361,3 +361,5 @@ function cloudletDrawing(x, y) {
   context.stroke();
   if (properties.fillElement) context.fill();
 }
+
+Завдання виконано
