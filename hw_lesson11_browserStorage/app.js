@@ -22,7 +22,7 @@ class Tracker {
     name,
     seconds = 0,
     isPause = false,
-    startTime = 0,
+    startTime = "",
     lsMode = false
   ) {
     this.name = name;
@@ -36,7 +36,8 @@ class Tracker {
 
     if (isPause) {
       this.addStyle();
-      //this.convertAndSetTime(seconds);
+      this.lsMode = false;
+      this.startTime = new Date();
     } else {
       this.startTimer();
     }
@@ -51,33 +52,33 @@ class Tracker {
   static getDataFromLocalStorage() {
     const save = JSON.parse(localStorage.getItem("tracker list"));
     if (save) {
-      Tracker.dataFromLocalStorage = save;
+      Tracker.dataFromLocalStorage = save.reverse();
     }
   }
 
   startTimer() {
     if (this.timer) return;
-    this.isPause = false;
 
     if (!this.lsMode) this.startTime = new Date();
 
+    this.isPause = false;
+    this.lsMode = false;
     this.timer = setInterval(() => {
-      const currentTime = new Date();
-      this.time =
-        +((currentTime.getTime() - this.startTime.getTime(0)) / 1000).toFixed(
-          0
-        ) + this.seconds;
       this.convertAndSetTime(this.time);
-
       if (this.time >= 360000) this.destroyTracker();
     }, 1000);
     this.removeStyle();
   }
 
-  convertAndSetTime(time) {
-    let hh = Math.floor(time / 3600);
-    let mm = Math.floor((time - hh * 3600) / 60);
-    let ss = time - hh * 3600 - mm * 60;
+  convertAndSetTime() {
+    const currentTime = new Date();
+    this.time =
+      +((currentTime.getTime() - this.startTime.getTime(0)) / 1000).toFixed(0) +
+      this.seconds;
+
+    let hh = Math.floor(this.time / 3600);
+    let mm = Math.floor((this.time - hh * 3600) / 60);
+    let ss = this.time - hh * 3600 - mm * 60;
 
     const message = `${(hh = hh < 10 ? "0" + hh : hh)}:${(mm =
       mm < 10 ? "0" + mm : mm)}:${(ss = ss < 10 ? "0" + ss : ss)}`;
@@ -152,7 +153,7 @@ if (Tracker.dataFromLocalStorage) {
   Tracker.dataFromLocalStorage.map((tracker) => {
     createNewTracer(
       tracker.name,
-      tracker.time,
+      tracker.seconds,
       tracker.isPause,
       tracker.startTime,
       true
@@ -194,8 +195,14 @@ mainInput.addEventListener("click", (event) => {
       : new Date().toLocaleString()
   );
   form.elements.name.value = null;
+  Tracker.addDataToLocalStorage();
 });
 
-// createNewTracer("first");
-// createNewTracer("second");
-// createNewTracer("third");
+function beforeExit() {
+  Tracker.addDataToLocalStorage();
+  return true;
+}
+
+window.onstorage = (event) => {
+  console.log(event);
+};
