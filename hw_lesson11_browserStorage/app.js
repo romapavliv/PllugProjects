@@ -53,6 +53,20 @@ class Tracker {
     const save = JSON.parse(localStorage.getItem("tracker list"));
     if (save) {
       Tracker.dataFromLocalStorage = save.reverse();
+      if (Tracker.trackerList) {
+        Tracker.trackerList.map((tracker) => {
+          tracker.destroyTracker();
+        });
+      }
+      Tracker.dataFromLocalStorage.map((tracker) => {
+        createNewTracer(
+          tracker.name,
+          tracker.seconds,
+          tracker.isPause,
+          tracker.startTime,
+          true
+        );
+      });
     }
   }
 
@@ -149,18 +163,6 @@ const mainInput = document.querySelector("#main-input");
 // local storage
 Tracker.getDataFromLocalStorage();
 
-if (Tracker.dataFromLocalStorage) {
-  Tracker.dataFromLocalStorage.map((tracker) => {
-    createNewTracer(
-      tracker.name,
-      tracker.seconds,
-      tracker.isPause,
-      tracker.startTime,
-      true
-    );
-  });
-}
-
 // creator
 function createNewTracer(name, seconds, isPause, startTime, lsMode) {
   const newTracer = new Tracker(name, seconds, isPause, startTime, lsMode);
@@ -174,6 +176,7 @@ allTrackers.addEventListener("click", (event) => {
     Tracker.trackerList.map((tracer) => {
       if (tracer.id === currentId) {
         tracer.isPause ? tracer.startTimer() : tracer.stopTimer();
+        Tracker.addDataToLocalStorage();
       }
     });
   }
@@ -182,9 +185,11 @@ allTrackers.addEventListener("click", (event) => {
     Tracker.trackerList.map((tracer) => {
       if (tracer.id === currentId) {
         tracer.destroyTracker();
+        Tracker.addDataToLocalStorage();
       }
     });
   }
+  Tracker.getDataFromLocalStorage();
 });
 
 mainInput.addEventListener("click", (event) => {
@@ -203,6 +208,6 @@ function beforeExit() {
   return true;
 }
 
-window.onstorage = (event) => {
-  console.log(event);
+window.onstorage = () => {
+  Tracker.getDataFromLocalStorage();
 };
