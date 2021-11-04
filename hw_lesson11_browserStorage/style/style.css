@@ -180,9 +180,8 @@ a {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin-bottom: .5rem;
   border-bottom: 1px solid #9b9b9b;
-  margin: 1.5rem;
+  margin: 1.5rem 0;
   color: #379f6f;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -223,5 +222,34 @@ a {
 
 .content .trackers .pause > .buttons > .pause-btn {
   background: url("img/darkPlay.png") 0 0/cover;
+}
+
+@media (max-width: 767px) {
+  .page {
+    font-size: 14px;
+  }
+  .content {
+    width: 320px;
+  }
+  .content > h1 {
+    font-size: 30px;
+  }
+  .content > form > input {
+    width: 250px;
+    height: 35px;
+  }
+  .content .trackers {
+    width: 310px;
+  }
+  .content .trackers__tracker {
+    width: 100%;
+    min-height: 40px;
+  }
+  .content .trackers__tracker > p {
+    width: 130px;
+  }
+  .content .trackers__tracker > span {
+    width: 50px;
+  }
 }
 /*# sourceMappingURL=style.css.map */
