@@ -5,27 +5,38 @@ class Tracker {
   name = "";
   id = "";
   isPause = false;
+  startTime;
 
-  startTime = "";
-  timer = "";
   seconds = 0;
   time = 0;
+
+  timer = "";
+  lsMode;
 
   #span;
   #tracker;
   #pauseBtn;
   #removeBtn;
 
-  constructor(name, seconds = 0, isPause = false) {
+  constructor(
+    name,
+    seconds = 0,
+    isPause = false,
+    startTime = 0,
+    lsMode = false
+  ) {
     this.name = name;
     this.seconds = seconds;
     this.isPause = isPause;
+    this.startTime = new Date(startTime);
+    this.lsMode = lsMode;
+
     this.id = this.idGenerator();
     this.createTimer();
 
     if (isPause) {
       this.addStyle();
-      this.convertAndSetTime(seconds);
+      //this.convertAndSetTime(seconds);
     } else {
       this.startTimer();
     }
@@ -37,7 +48,7 @@ class Tracker {
     localStorage.setItem("tracker list", JSON.stringify(Tracker.trackerList));
   }
 
-  static getDateFromLocalStorage() {
+  static getDataFromLocalStorage() {
     const save = JSON.parse(localStorage.getItem("tracker list"));
     if (save) {
       Tracker.dataFromLocalStorage = save;
@@ -47,7 +58,8 @@ class Tracker {
   startTimer() {
     if (this.timer) return;
     this.isPause = false;
-    this.startTime = new Date();
+
+    if (!this.lsMode) this.startTime = new Date();
 
     this.timer = setInterval(() => {
       const currentTime = new Date();
@@ -133,19 +145,28 @@ const form = document.forms["form"];
 const allTrackers = document.querySelector(".trackers");
 const mainInput = document.querySelector("#main-input");
 
-Tracker.getDateFromLocalStorage();
+// local storage
+Tracker.getDataFromLocalStorage();
 
 if (Tracker.dataFromLocalStorage) {
   Tracker.dataFromLocalStorage.map((tracker) => {
-    createNewTracer(tracker.name, tracker.time, tracker.isPause);
+    createNewTracer(
+      tracker.name,
+      tracker.time,
+      tracker.isPause,
+      tracker.startTime,
+      true
+    );
   });
 }
 
-function createNewTracer(name, seconds = 0, isPause) {
-  const newTracer = new Tracker(name, seconds, isPause);
+// creator
+function createNewTracer(name, seconds, isPause, startTime, lsMode) {
+  const newTracer = new Tracker(name, seconds, isPause, startTime, lsMode);
   Tracker.trackerList.unshift(newTracer);
 }
 
+// event listeners
 allTrackers.addEventListener("click", (event) => {
   const currentId = event.target.dataset["id"];
   if (event.target.classList.contains("pause-btn")) {
