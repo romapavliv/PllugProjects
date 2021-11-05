@@ -206,3 +206,5 @@ window.addEventListener("unload", Tracker.addDataToLocalStorage);
 window.onstorage = () => {
   Tracker.getDataFromLocalStorage();
 };
+
+Завдання виконано.
