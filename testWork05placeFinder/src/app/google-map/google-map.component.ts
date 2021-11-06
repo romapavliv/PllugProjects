@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { MapsAPILoader } from '@agm/core';
+import { DataPlace } from '../shared/interfaces';
+declare var google: any;
 @Component({
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
@@ -20,7 +22,7 @@ export class GoogleMapComponent implements OnInit {
   lat = 49.8397;
   lng = 24.0297;
 
-  constructor() {
+  constructor(public mapsAPILoader: MapsAPILoader) {
   }
 
   ngOnInit(): void {
@@ -32,5 +34,51 @@ export class GoogleMapComponent implements OnInit {
       this.lat = 49.8397
       this.lng = 24.0297
     })
+
+    this.mapsAPILoader.load().then(() => {
+      const map = new google.maps.Map(
+        document.getElementById("map"),
+        {
+          center: {
+            lat: 49.841306,
+            lng: 24.035254
+          },
+          zoom: 14,
+        }
+      );
+      this.test.forEach((place: DataPlace) => {
+        this.createMarker(map, place)
+      })
+    });
+  }
+
+  createMarker(map: any, place: DataPlace, label: string = '') {
+    const newInfoWindow = new google.maps.InfoWindow({
+      content: place.name,
+    });
+    const marker = new google.maps.Marker({
+      position: {
+        lat: place.lat,
+        lng: place.lng
+      },
+      map,
+      label: label
+    });
+    marker.addListener("click", (infowindow: any, c: any) => {
+      newInfoWindow.open({
+        anchor: marker,
+        map,
+        shouldFocus: false,
+      });
+
+    });
+    // marker.addListener("click", (infowindow: any, c: any) => {
+    //   newInfoWindow.open({
+    //     anchor: marker,
+    //     map,
+    //     shouldFocus: false,
+    //   });
+
+    // });
   }
 }

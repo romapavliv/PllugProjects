@@ -1,6 +1,9 @@
-<h2>sonmetext</h2>
-
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+<!-- <agm-map id="map" (mapClick)="someFunk($event)" [latitude]="lat" [longitude]="lng" [zoom]="14">
+  <agm-marker [label]="'I\'m'" [latitude]="lat" [longitude]="lng"></agm-marker>
   <agm-marker [latitude]="49.841306" [longitude]="24.035254"></agm-marker>
-</agm-map>
+  <agm-marker (markerClick)="markerClick($event)" *ngFor="let location of test" [latitude]="location.lat"
+    [longitude]="location.lng">
+  </agm-marker>
+</agm-map> -->
+
+<div class="full" id="map"></div>
