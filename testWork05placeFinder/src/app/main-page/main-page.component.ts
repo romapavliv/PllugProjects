@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlacesService } from '../shared/places.service';
 import { DataLocation } from '../shared/interfaces';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -11,16 +12,21 @@ import { DataLocation } from '../shared/interfaces';
 export class MainPageComponent implements OnInit {
 
 
+  form!: FormGroup
   obj: DataLocation = {
     "query": "restaurant",
     "radius": 100000,
-    "lat": 52,
-    "lng": 24
+    "lat": 49.8397,
+    "lng": 24.0297
   }
+
   constructor(private places: PlacesService) { }
 
 
   ngOnInit(): void {
+    this.form = new FormGroup({
+      place: new FormControl('restaurant')
+    })
 
     this.places.placeSearch(this.obj).subscribe((response) => {
       console.log(response);
@@ -29,4 +35,8 @@ export class MainPageComponent implements OnInit {
     })
   }
 
+  onSubmit(): void {
+    console.log(this.form.value);
+
+  }
 }
