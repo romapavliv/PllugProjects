@@ -1,7 +1,7 @@
 <div class="content">
   <h1>Place Finder</h1>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <select name="place" formControlName="place">
+    <select name="query" formControlName="query">
       <option value="restaurant">Restaurant</option>
       <option value="museum">Museum</option>
       <option value="hotel">Hotel</option>
@@ -11,6 +11,6 @@
     <button class="submit-btn" type="submit">Send</button>
   </form>
   <div class="map">
-    <app-google-map></app-google-map>
+    <app-google-map *ngIf="showMap"></app-google-map>
   </div>
 </div>

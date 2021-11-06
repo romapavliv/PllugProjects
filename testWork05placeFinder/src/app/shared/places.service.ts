@@ -8,10 +8,22 @@ import { DataLocation, DataPlace } from './interfaces';
   providedIn: 'root'
 })
 export class PlacesService {
+  private geoData!: DataLocation
 
   constructor(private http: HttpClient) { }
 
-  placeSearch(data: DataLocation): Observable<DataPlace> {
-    return this.http.post<DataPlace>(`${environment.SWUrl}/search`, data);
+  placeSearch(): Observable<DataPlace> {
+    console.log('test');
+
+    return this.http.post<DataPlace>(`${environment.SWUrl}/search`, this.geoData);
   }
+
+  set geolocationData(geoData) {
+    this.geoData = geoData
+  }
+
+  get geolocationData(): DataLocation {
+    return this.geoData;
+  }
+
 }

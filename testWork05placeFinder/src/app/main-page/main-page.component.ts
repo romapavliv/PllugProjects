@@ -10,33 +10,35 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./main-page.component.scss']
 })
 export class MainPageComponent implements OnInit {
-
-
   form!: FormGroup
-  obj: DataLocation = {
-    "query": "restaurant",
-    "radius": 100000,
-    "lat": 49.8397,
-    "lng": 24.0297
-  }
+  showMap = false
 
-  constructor(private places: PlacesService) { }
-
+  constructor(public places: PlacesService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      place: new FormControl('restaurant')
-    })
-
-    this.places.placeSearch(this.obj).subscribe((response) => {
-      console.log(response);
-    }, (err) => {
-      console.log('some error', err);
+      query: new FormControl('restaurant')
     })
   }
 
   onSubmit(): void {
-    console.log(this.form.value);
+
+    // const newData: DataLocation = {
+    //   query: this.form.value.query,
+    //   radius: 100000,
+    //   "lat": 49.8397,
+    //   "lng": 24.0297
+    // }
+    navigator.geolocation.getCurrentPosition(({ coords }) => {
+      const newData: DataLocation = {
+        query: this.form.value.query,
+        radius: 100000,
+        lat: coords.latitude,
+        lng: coords.longitude
+      }
+      this.places.geolocationData = newData;
+      this.showMap = true
+    })
 
   }
 }

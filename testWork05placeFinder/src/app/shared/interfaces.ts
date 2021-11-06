@@ -6,9 +6,9 @@ export interface DataLocation {
 }
 
 export interface DataPlace {
-  address: string;
-  city: string;
-  lat: number;
-  lng: number;
   name: string;
+  lng: number;
+  lat: number;
+  address?: string;
+  city?: string;
 }
