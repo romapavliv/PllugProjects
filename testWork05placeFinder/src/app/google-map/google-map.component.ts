@@ -16,6 +16,10 @@ export class GoogleMapComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initMap()
+  }
+
+  initMap():void {
     const yourPlace: DataPlace = {
       name: 'Your geolocation',
       lat: this.places.geolocationData.lat,
@@ -40,8 +44,6 @@ export class GoogleMapComponent implements OnInit {
         })
       });
     })
-
-
   }
 
   createMarker(map: any, place: DataPlace, label: string = '') {

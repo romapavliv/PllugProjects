@@ -13,8 +13,6 @@ export class PlacesService {
   constructor(private http: HttpClient) { }
 
   placeSearch(): Observable<DataPlace> {
-    console.log('test');
-
     return this.http.post<DataPlace>(`${environment.SWUrl}/search`, this.geoData);
   }
 

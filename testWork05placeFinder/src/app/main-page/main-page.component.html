@@ -8,6 +8,14 @@
       <option value="coffee">Coffee</option>
       <option value="McDonalds">McDonalds</option>
     </select>
+    <div class="distance">
+      <label *ngFor="let data of distanceData; let idx=index"
+        [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
+        <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)"
+          (change)="isAllSelected($event, idx)" [checked]="data.isSelected" />
+        {{data.name}}
+      </label>
+    </div>
     <button class="submit-btn" type="submit">Send</button>
   </form>
   <div class="map">
