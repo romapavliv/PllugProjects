@@ -36,7 +36,7 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      query: new FormControl('restaurant')
+      query: new FormControl('restaurant'),
     });
   }
   isAllSelected({ target }: any, id: number, checkboxesData: Array<any>, isRadius: boolean): void {
@@ -55,14 +55,13 @@ export class MainPageComponent implements OnInit {
         query: this.form.value.query,
         radius: +this.radiusData[this.radiusCurrentId].value,
         lat: coords.latitude,
-        lng: coords.longitude
+        lng: coords.longitude,
       }
 
       if (this.responseTypeData[this.responseTypeCurrentId].value === 'map') {
         this.places.geolocationData = newData;
         this.showMap = true;
       } else {
-
         this.places.placeScv(newData).subscribe((csv) => {
           const file = new Blob([csv], { type: 'text/csv' });
           saveAs(file, `${newData.query}${newData.radius / 1000}km.csv`);

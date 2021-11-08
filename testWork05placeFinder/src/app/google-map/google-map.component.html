@@ -1,4 +1,14 @@
-<div class="full" id="map"></div>
-<!-- <agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map> -->
+<agm-map #map id="map" *ngIf="place" [latitude]="lat" [longitude]="lng" [zoom]="mapZoom">
+  <agm-marker #marker (markerClick)="markerClick(infoWindow)" [latitude]="lat" [longitude]="lng" [zIndex]="5"
+    [label]="{color: 'white', text: 'You', fontSize: '11px', fontWeight: 'bold'}">
+    <agm-info-window #infoWindow [disableAutoPan]="true">
+      Your geolocation
+    </agm-info-window>
+  </agm-marker>
+  <agm-marker #marker (markerClick)="markerClick(infoWindow)" *ngFor="let location of place" [latitude]="location.lat"
+    [longitude]="location.lng">
+    <agm-info-window #infoWindow [disableAutoPan]="true">
+      {{location.name}}
+    </agm-info-window>
+  </agm-marker>
+</agm-map>

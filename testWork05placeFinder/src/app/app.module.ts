@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
   declarations: [
     AppComponent,
     MainPageComponent,
-    GoogleMapComponent
+    GoogleMapComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +22,7 @@ import { environment } from 'src/environments/environment';
 
     AgmCoreModule.forRoot({
       apiKey: environment.GMApiKey
-    })
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,17 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { MapsAPILoader } from '@agm/core';
+import { AgmInfoWindow, MapsAPILoader } from '@agm/core';
 
-import { DataPlace } from '../shared/interfaces';
 import { PlacesService } from '../shared/places.service';
-declare var google: any;
+
 @Component({
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
   styleUrls: ['./google-map.component.scss']
 })
 export class GoogleMapComponent implements OnInit {
-  //lat = 49.8397
-  //lng = 24.0297
+  zoomData: any = {
+    500: 16,
+    1000: 15,
+    5000: 15,
+    10000: 14,
+    20000: 13,
+    50000: 10,
+    100000: 10,
+  };
+  lat = 49.8397;
+  lng = 24.0297;
+  place!: any;
+  openedInfoWindow!: any;
+  mapZoom = 14;
 
   constructor(
     public mapsAPILoader: MapsAPILoader,
@@ -19,61 +30,19 @@ export class GoogleMapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initMap();
-  }
-
-  initMap(): void {
-    const yourPlace: DataPlace = {
-      name: 'Your geolocation',
-      lat: this.places.geolocationData.lat,
-      lng: this.places.geolocationData.lng,
-    }
+    this.mapZoom = this.zoomData[this.places.geolocationData.radius]
+    this.lat = this.places.geolocationData.lat;
+    this.lng = this.places.geolocationData.lng;
     this.places.placeSearch().subscribe((placesData: any) => {
-      this.mapsAPILoader.load().then(() => {
-        const map = new google.maps.Map(
-          document.getElementById("map"),
-          {
-            center: {
-              lat: yourPlace.lat,
-              lng: yourPlace.lng
-            },
-            zoom: 14,
-          }
-        );
-
-        this.createMarker(map, yourPlace, 'You')
-        placesData.forEach((place: DataPlace) => {
-          this.createMarker(map, place);
-        })
-      });
+      this.place = placesData;
     })
-
   }
 
-  createMarker(map: any, place: DataPlace, label: string = '') {
-    const newInfoWindow = new google.maps.InfoWindow({
-      content: place.name,
-    });
-    const marker = new google.maps.Marker({
-      position: {
-        lat: place.lat,
-        lng: place.lng
-      },
-      map,
-      label,
-    });
-    marker.addListener("click", (event: any) => {
-      console.log(event);
-
-      newInfoWindow.open({
-        anchor: marker,
-        map,
-        shouldFocus: false,
-      });
-
-    });
-
-
-
+  markerClick(infoWindow: AgmInfoWindow): void {
+    if (this.openedInfoWindow) {
+      this.openedInfoWindow.close();
+    }
+    infoWindow.open();
+    this.openedInfoWindow = infoWindow;
   }
 }
