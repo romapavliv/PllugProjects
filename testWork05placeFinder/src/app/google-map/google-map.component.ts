@@ -10,6 +10,8 @@ declare var google: any;
   styleUrls: ['./google-map.component.scss']
 })
 export class GoogleMapComponent implements OnInit {
+  //lat = 49.8397
+  //lng = 24.0297
 
   constructor(
     public mapsAPILoader: MapsAPILoader,
@@ -45,6 +47,7 @@ export class GoogleMapComponent implements OnInit {
         })
       });
     })
+
   }
 
   createMarker(map: any, place: DataPlace, label: string = '') {
@@ -59,12 +62,18 @@ export class GoogleMapComponent implements OnInit {
       map,
       label,
     });
-    marker.addListener("click", () => {
+    marker.addListener("click", (event: any) => {
+      console.log(event);
+
       newInfoWindow.open({
         anchor: marker,
         map,
         shouldFocus: false,
       });
+
     });
+
+
+
   }
 }

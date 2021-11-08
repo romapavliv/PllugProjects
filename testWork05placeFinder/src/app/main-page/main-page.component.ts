@@ -62,7 +62,7 @@ export class MainPageComponent implements OnInit {
         this.places.geolocationData = newData;
         this.showMap = true;
       } else {
-        this.wavyLoading = false;
+
         this.places.placeScv(newData).subscribe((csv) => {
           const file = new Blob([csv], { type: 'text/csv' });
           saveAs(file, `${newData.query}${newData.radius / 1000}km.csv`);
