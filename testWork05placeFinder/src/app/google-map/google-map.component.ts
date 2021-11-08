@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
+
 import { DataPlace } from '../shared/interfaces';
 import { PlacesService } from '../shared/places.service';
 declare var google: any;
@@ -16,10 +17,10 @@ export class GoogleMapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initMap()
+    this.initMap();
   }
 
-  initMap():void {
+  initMap(): void {
     const yourPlace: DataPlace = {
       name: 'Your geolocation',
       lat: this.places.geolocationData.lat,
@@ -40,7 +41,7 @@ export class GoogleMapComponent implements OnInit {
 
         this.createMarker(map, yourPlace, 'You')
         placesData.forEach((place: DataPlace) => {
-          this.createMarker(map, place)
+          this.createMarker(map, place);
         })
       });
     })
@@ -56,7 +57,7 @@ export class GoogleMapComponent implements OnInit {
         lng: place.lng
       },
       map,
-      label: label
+      label,
     });
     marker.addListener("click", () => {
       newInfoWindow.open({

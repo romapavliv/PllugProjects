@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -7,6 +7,7 @@ import { DataLocation, DataPlace } from './interfaces';
 @Injectable({
   providedIn: 'root'
 })
+
 export class PlacesService {
   private geoData!: DataLocation
 
@@ -16,12 +17,20 @@ export class PlacesService {
     return this.http.post<DataPlace>(`${environment.SWUrl}/search`, this.geoData);
   }
 
-  set geolocationData(geoData) {
-    this.geoData = geoData
+  placeScv(data: DataLocation): Observable<string> {
+    const headers = new HttpHeaders({
+      Accept: 'text/csv',
+    });
+    const options = { headers, responseType: 'text' as any };
+
+    return this.http.post<string>(`${environment.SWUrl}/csv`, data, options);
+  }
+
+  set geolocationData(geoData: DataLocation) {
+    this.geoData = geoData;
   }
 
   get geolocationData(): DataLocation {
     return this.geoData;
   }
-
 }
