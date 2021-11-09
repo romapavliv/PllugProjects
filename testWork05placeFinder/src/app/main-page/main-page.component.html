@@ -1,46 +1,35 @@
 <div class="content">
-  <h1>Place Finder</h1>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <select name="query" formControlName="query">
-      <option value="restaurant">Restaurant</option>
-      <option value="museum">Museum</option>
-      <option value="hotel">Hotel</option>
-      <option value="coffee">Coffee</option>
-      <option value="McDonalds">McDonalds</option>
-    </select>
-    <div class="radius">
-      <label *ngFor="let data of radiusData; let idx=index"
-        [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
-        <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, radiusData, true)"
-          [checked]="data.isSelected" />
-        {{data.name}}
-      </label>
-    </div>
-    <div class="response-type">
-      <label *ngFor="let data of responseTypeData; let idx=index"
-        [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
-        <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, responseTypeData, false)"
-          [checked]="data.isSelected" />
-        {{data.name}}
-      </label>
-    </div>
-    <button class="submit-btn" type="submit">Send</button>
-  </form>
+  <div class="top-bar">
+    <h1>Place Finder</h1>
+    <form class="top-bar__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <select name="query" formControlName="query">
+        <option value="restaurant">Restaurant</option>
+        <option value="museum">Museum</option>
+        <option value="hotel">Hotel</option>
+        <option value="coffee">Coffee</option>
+        <option value="McDonalds">McDonalds</option>
+      </select>
+      <div class="radius">
+
+        <label *ngFor="let data of radiusData; let idx=index"
+          [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
+          <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, radiusData, true)"
+            [checked]="data.isSelected" />
+          {{data.name}}
+        </label>
+      </div>
+      <div class="response-type">
+        <label *ngFor="let data of responseTypeData; let idx=index"
+          [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
+          <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, responseTypeData, false)"
+            [checked]="data.isSelected" />
+          {{data.name}}
+        </label>
+      </div>
+      <button class="submit-btn" type="submit">Send</button>
+    </form>
+  </div>
   <div class="map">
     <app-google-map *ngIf="showMap"></app-google-map>
-
-    <!-- <div class="wavy-loading" *ngIf="wavyLoading">
-      <span style="--i:1;">L</span>
-      <span style="--i:2;">O</span>
-      <span style="--i:3;">A</span>
-      <span style="--i:4;">D</span>
-      <span style="--i:5;">I</span>
-      <span style="--i:6;">N</span>
-      <span style="--i:7;">G</span>
-      <span style="--i:8;">.</span>
-      <span style="--i:9;">.</span>
-      <span style="--i:10;">.</span>
-    </div> -->
-
   </div>
 </div>

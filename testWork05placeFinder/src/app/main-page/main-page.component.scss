@@ -2,45 +2,47 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(193, 200, 229, 1) 11%, rgba(212, 214, 235, 1) 100%);
+
 }
 
 .map {
   width: 90%;
-  height: 500px;
-  background-color: red;
+  height: 85%;
+  box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px rgba(255, 255, 255, 1);
+  border-radius: 10px;
   position: relative;
+  margin: 1rem 0;
+  overflow: hidden;
 }
 
-// pp-google-map{
-//   z-index: 1;
+.top-bar {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background: linear-gradient(90deg, rgba(51, 52, 98, 1) 30%, rgba(32, 37, 67, 1) 100%);
+  box-shadow: 0 .25em .25em -.125em rgba(0, 0, 0, .25),
+    0 .5em 1.25em rgba(0, 0, 0, .5);
+  border-bottom-left-radius: 20px;
 
-// }
-.wavy-loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 0;
-  transform: translateX(-50%);
-  span {
-    position: relative;
-    font-size: 2em;
-    display: inline-block;
-    animation: wavy 1s ease-in-out infinite;
-    animation-delay: calc(0.1s * var(--i));
+  &>h1 {
+    font-size: 34px;
+    font-weight: 500;
+    color: #ffffff;
+    text-shadow:
+      1px 2px 1px #202020,
+      1px 3px 1px #000000,
   }
 
-  @keyframes wavy {
-    0% {
-      transform: translateY(0px);
-    }
 
-    20% {
-      transform: translateY(-20px);
-    }
+  &__form {
+    display: flex;
+    flex-direction: row;
 
-    40%,
-    100% {
-      transform: translateY(0px);
-    }
   }
 }

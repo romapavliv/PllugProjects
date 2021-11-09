@@ -24,6 +24,7 @@ export class GoogleMapComponent implements OnInit {
   place!: any;
   openedInfoWindow!: any;
   mapZoom = 14;
+  wavyLoading = true;
 
   constructor(
     public mapsAPILoader: MapsAPILoader,
@@ -39,9 +40,10 @@ export class GoogleMapComponent implements OnInit {
 
     this.places.placeSearch().subscribe((placesData: any) => {
       this.place = placesData;
-
     }, (err) => {
       this.router.navigate(['/'], { queryParams: { errorStatus: err.status } });
+    }, () => {
+      this.wavyLoading = false;
     })
   }
 

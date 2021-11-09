@@ -1,16 +1,51 @@
 agm-map {
   height: 100%;
   width: 100%;
-  z-index: 50;
+
 }
 
 
-.labels {
-  color: white;
-  background-color: red;
-  font-family: "Lucida Grande", "Arial", sans-serif;
-  font-size: 10px;
-  text-align: center;
-  width: 100px;
-  white-space: nowrap;
+// .labels {
+//   color: white;
+//   background-color: red;
+//   font-family: "Lucida Grande", "Arial", sans-serif;
+//   font-size: 10px;
+//   text-align: center;
+//   width: 100px;
+//   white-space: nowrap;
+// }
+
+.wavy-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #000000;
+  font-weight: bold;
+
+  span {
+    position: relative;
+    font-size: 2em;
+    display: inline-block;
+    animation: wavy 1s ease-in-out infinite;
+    animation-delay: calc(0.1s * var(--i));
+    text-shadow:
+      1px 2px 1px #c7c7c7,
+      1px 3px 1px #ffffff,
+  }
+
+  @keyframes wavy {
+    0% {
+      transform: translateY(0px);
+    }
+
+    20% {
+      transform: translateY(-20px);
+    }
+
+    40%,
+    100% {
+      transform: translateY(0px);
+    }
+  }
 }

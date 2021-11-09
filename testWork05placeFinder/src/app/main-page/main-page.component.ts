@@ -17,7 +17,6 @@ export class MainPageComponent implements OnInit {
   showMap = false;
   radiusCurrentId = 0;
   responseTypeCurrentId = 0;
-  wavyLoading = false;
 
   radiusData: Array<Checkbox> = [
     { id: 0, name: '0.5km', value: 500, isSelected: true },
@@ -35,7 +34,7 @@ export class MainPageComponent implements OnInit {
 
   constructor(
     private places: PlacesService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -55,7 +54,6 @@ export class MainPageComponent implements OnInit {
 
   onSubmit(): void {
     this.router.navigate(['/'], {});
-    this.wavyLoading = true;
     this.showMap = false;
     navigator.geolocation.getCurrentPosition(({ coords }) => {
       const newData: DataLocation = {
