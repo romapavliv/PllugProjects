@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { PlacesService } from '../shared/places.service';
 import { Checkbox, DataLocation } from '../shared/interfaces';
 import { saveAs } from 'file-saver';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -32,13 +33,18 @@ export class MainPageComponent implements OnInit {
     { id: 1, name: 'Csv', value: 'csv', isSelected: false },
   ];
 
-  constructor(private places: PlacesService) { }
+  constructor(
+    private places: PlacesService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.router.navigate(['/'], {});
     this.form = new FormGroup({
       query: new FormControl('restaurant'),
     });
   }
+
   isAllSelected({ target }: any, id: number, checkboxesData: Array<any>, isRadius: boolean): void {
     checkboxesData.forEach(val => {
       val.isSelected = val.id === id ? !val.isSelected : false;
@@ -48,6 +54,7 @@ export class MainPageComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.router.navigate(['/'], {});
     this.wavyLoading = true;
     this.showMap = false;
     navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -66,7 +73,7 @@ export class MainPageComponent implements OnInit {
           const file = new Blob([csv], { type: 'text/csv' });
           saveAs(file, `${newData.query}${newData.radius / 1000}km.csv`);
         }, (err) => {
-          console.log('some', err);
+          this.router.navigate(['/'], { queryParams: { errorStatus: err.status } });
         })
       }
     })

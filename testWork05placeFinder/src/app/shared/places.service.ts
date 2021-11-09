@@ -16,13 +16,13 @@ export class PlacesService {
 
   placeSearch(): Observable<DataPlace> {
 
-    // return this.http.post<DataPlace>(`${environment.SWUrl}/search`, {
-    //   "query": "restaurant",
-    //   "radius": 500,
-    //   "lat": 49.8397,
-    //   "lng": 24.0297
-    // }); //!DEBUG
-    return this.http.post<DataPlace>(`${environment.SWUrl}/search`, this.geoData);
+    return this.http.post<DataPlace>(`${environment.SWUrl}/search`, {
+      "query": "restaurant",
+      "radius": 500,
+      "lat": 49.8397,
+      //"lng": 24.0297
+    }); //!DEBUG
+    //return this.http.post<DataPlace>(`${environment.SWUrl}/search`, this.geoData);
   }
 
   placeScv(data: DataLocation): Observable<string> {

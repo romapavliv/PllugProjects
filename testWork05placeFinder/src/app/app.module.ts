@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { environment } from 'src/environments/environment';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,11 @@ import { environment } from 'src/environments/environment';
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
+    RouterModule,
 
+    [RouterModule.forRoot([{
+      path: '', component: AppComponent,
+    }])],
     AgmCoreModule.forRoot({
       apiKey: environment.GMApiKey
     }),
