@@ -1,0 +1,9 @@
+POST http://198.199.125.240:8888/search
+Content-Type: application/json
+
+{
+  "query": "restaurant",
+  "radius": 100000,
+  "lat": 90,
+  "lng": 180
+}

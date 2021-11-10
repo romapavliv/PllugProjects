@@ -19,13 +19,13 @@ export class MainPageComponent implements OnInit {
   responseTypeCurrentId = 0;
 
   radiusData: Array<Checkbox> = [
-    { id: 0, name: '0.5km', value: 500, isSelected: true },
-    { id: 1, name: '1km', value: 1000, isSelected: false },
-    { id: 2, name: '5km', value: 5000, isSelected: false },
-    { id: 3, name: '10km', value: 10000, isSelected: false },
-    { id: 4, name: '20km', value: 20000, isSelected: false },
-    { id: 5, name: '50km', value: 50000, isSelected: false },
-    { id: 6, name: '100km', value: 100000, isSelected: false }
+    { id: 0, name: '0.5', value: 500, isSelected: true },
+    { id: 1, name: '1', value: 1000, isSelected: false },
+    { id: 2, name: '5', value: 5000, isSelected: false },
+    { id: 3, name: '10', value: 10000, isSelected: false },
+    { id: 4, name: '20', value: 20000, isSelected: false },
+    { id: 5, name: '50', value: 50000, isSelected: false },
+    { id: 6, name: '100', value: 100000, isSelected: false }
   ];
   responseTypeData: Array<Checkbox> = [
     { id: 0, name: 'Map', value: 'map', isSelected: true },

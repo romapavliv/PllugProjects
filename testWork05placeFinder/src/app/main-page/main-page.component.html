@@ -1,7 +1,7 @@
 <div class="content">
   <div class="top-bar">
     <h1>Place Finder</h1>
-    <form class="top-bar__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <select name="query" formControlName="query">
         <option value="restaurant">Restaurant</option>
         <option value="museum">Museum</option>
@@ -9,22 +9,28 @@
         <option value="coffee">Coffee</option>
         <option value="McDonalds">McDonalds</option>
       </select>
-      <div class="radius">
-
-        <label *ngFor="let data of radiusData; let idx=index"
-          [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
-          <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, radiusData, true)"
-            [checked]="data.isSelected" />
-          {{data.name}}
-        </label>
+      <div class="form__radius">
+        <p>Radius(KM)</p>
+        <div class="radius-checkboxes">
+          <label *ngFor="let data of radiusData; let idx=index"
+            [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
+            <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, radiusData, true)"
+              [checked]="data.isSelected" />
+            {{data.name}}
+          </label>
+        </div>
       </div>
-      <div class="response-type">
-        <label *ngFor="let data of responseTypeData; let idx=index"
-          [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
-          <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, responseTypeData, false)"
-            [checked]="data.isSelected" />
-          {{data.name}}
-        </label>
+
+      <div class="form__response-type">
+        <p>Response Type</p>
+        <div class="response-type-checkboxes">
+          <label *ngFor="let data of responseTypeData; let idx=index"
+            [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
+            <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, responseTypeData, false)"
+              [checked]="data.isSelected" />
+            {{data.name}}
+          </label>
+        </div>
       </div>
       <button class="submit-btn" type="submit">Send</button>
     </form>
