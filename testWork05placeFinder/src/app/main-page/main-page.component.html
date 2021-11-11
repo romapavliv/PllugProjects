@@ -12,27 +12,37 @@
       <div class="form__radius">
         <p>Radius(KM)</p>
         <div class="radius-checkboxes">
-          <label *ngFor="let data of radiusData; let idx=index"
-            [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
-            <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, radiusData, true)"
-              [checked]="data.isSelected" />
-            {{data.name}}
-          </label>
+          <div class="checkbox">
+
+            <label *ngFor="let data of radiusData; let idx=index"
+              [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
+              <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, radiusData, true)"
+                [checked]="data.isSelected" />
+              <span class="geek-mark"></span>
+              {{data.name}}
+            </label>
+          </div>
         </div>
       </div>
 
       <div class="form__response-type">
         <p>Response Type</p>
         <div class="response-type-checkboxes">
-          <label *ngFor="let data of responseTypeData; let idx=index"
-            [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
-            <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, responseTypeData, false)"
-              [checked]="data.isSelected" />
-            {{data.name}}
-          </label>
+          <div class="checkbox" *ngFor="let data of responseTypeData; let idx=index">
+            <label [ngStyle]="{'pointer-events': data.isSelected ? 'none':'all'}">
+              <input type="checkbox" [value]="data.value" (change)="isAllSelected($event, idx, responseTypeData, false)"
+                [checked]="data.isSelected" />
+              <span class="geek-mark"></span>
+              {{data.name}}
+            </label>
+          </div>
         </div>
       </div>
-      <button class="submit-btn" type="submit">Send</button>
+      <button class="submit-btn" type="submit">
+        <span class="front">
+          Send
+        </span>
+      </button>
     </form>
   </div>
   <div class="map">

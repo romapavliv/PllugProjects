@@ -1,19 +1,7 @@
 agm-map {
   height: 100%;
   width: 100%;
-
 }
-
-
-// .labels {
-//   color: white;
-//   background-color: red;
-//   font-family: "Lucida Grande", "Arial", sans-serif;
-//   font-size: 10px;
-//   text-align: center;
-//   width: 100px;
-//   white-space: nowrap;
-// }
 
 .wavy-loading {
   position: absolute;
@@ -21,11 +9,12 @@ agm-map {
   left: 50%;
   transform: translateX(-50%);
   color: #000000;
+  color: hsl(345deg 100% 47%);
   font-weight: bold;
 
   span {
     position: relative;
-    font-size: 2em;
+    font-size: 3rem;
     display: inline-block;
     animation: wavy 1s ease-in-out infinite;
     animation-delay: calc(0.1s * var(--i));
@@ -46,6 +35,22 @@ agm-map {
     40%,
     100% {
       transform: translateY(0px);
+    }
+  }
+}
+
+@media(max-width:992px) {
+  .wavy-loading {
+    span {
+      font-size: 2rem;
+    }
+  }
+}
+
+@media(max-width:767px) {
+  .wavy-loading {
+    span {
+      font-size: 1.5rem;
     }
   }
 }
