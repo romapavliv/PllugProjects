@@ -3,29 +3,24 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { DataLocation, DataPlace } from './interfaces';
+import { GeolocationData, AllPlacesData } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class PlacesService {
-  private geoData!: DataLocation;
+  private geoData!: GeolocationData;
 
   constructor(private http: HttpClient) { };
 
-  placeSearch(): Observable<DataPlace> {
-
-    // return this.http.post<DataPlace>(`${environment.SWUrl}/search`, {
-    //   "query": "restaurant",
-    //   "radius": 500,
-    //   "lat": 49.8397,
-    //   //"lng": 24.0297
-    // }); //!DEBUG
-    return this.http.post<DataPlace>(`${environment.SWUrl}/search`, this.geoData);
+  // get all places for map
+  placeSearch(): Observable<AllPlacesData> {
+    return this.http.post<AllPlacesData>(`${environment.SWUrl}/search`, this.geoData);
   }
 
-  placeScv(data: DataLocation): Observable<string> {
+  // get all places for csv file
+  placeScv(data: GeolocationData): Observable<string> {
     const headers = new HttpHeaders({
       Accept: 'text/csv',
     });
@@ -34,11 +29,11 @@ export class PlacesService {
     return this.http.post<string>(`${environment.SWUrl}/csv`, data, options);
   }
 
-  set geolocationData(geoData: DataLocation) {
+  set geolocationData(geoData: GeolocationData) {
     this.geoData = geoData;
   }
 
-  get geolocationData(): DataLocation {
+  get geolocationData(): GeolocationData {
     return this.geoData;
   }
 }

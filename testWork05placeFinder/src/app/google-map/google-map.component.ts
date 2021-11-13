@@ -47,6 +47,7 @@ export class GoogleMapComponent implements OnInit {
     })
   }
 
+  // open info window, and close last opened 
   markerClick(infoWindow: AgmInfoWindow): void {
     if (this.openedInfoWindow) {
       this.openedInfoWindow.close();

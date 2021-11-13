@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { PlacesService } from '../shared/places.service';
-import { Checkbox, DataLocation } from '../shared/interfaces';
+import { Checkbox, GeolocationData } from '../shared/interfaces';
 import { saveAs } from 'file-saver';
 import { Router } from '@angular/router';
 
@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class MainPageComponent implements OnInit {
   form!: FormGroup;
   showMap = false;
+  // checkboxes current state
   radiusCurrentId = 0;
   responseTypeCurrentId = 0;
 
@@ -44,6 +45,7 @@ export class MainPageComponent implements OnInit {
     });
   }
 
+  // only one checkbox can be true
   isAllSelected({ target }: any, id: number, checkboxesData: Array<any>, isRadius: boolean): void {
     checkboxesData.forEach(val => {
       val.isSelected = val.id === id ? !val.isSelected : false;
@@ -56,7 +58,7 @@ export class MainPageComponent implements OnInit {
     this.router.navigate(['/'], {});
     this.showMap = false;
     navigator.geolocation.getCurrentPosition(({ coords }) => {
-      const newData: DataLocation = {
+      const newData: GeolocationData = {
         query: this.form.value.query,
         radius: +this.radiusData[this.radiusCurrentId].value,
         lat: coords.latitude,

@@ -1,11 +1,11 @@
-export interface DataLocation {
+export interface GeolocationData {
   query: string;
   radius: number;
   lat: number;
   lng: number;
 }
 
-export interface DataPlace {
+export interface AllPlacesData {
   name: string;
   lng: number;
   lat: number;
